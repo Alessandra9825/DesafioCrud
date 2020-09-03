@@ -1,3 +1,5 @@
+package comuns;
+
 import java.util.Date;
 
 public class Roupa {
