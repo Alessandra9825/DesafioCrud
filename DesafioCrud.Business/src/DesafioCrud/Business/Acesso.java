@@ -1,4 +1,4 @@
-package business;
+package DesafioCrud.Business;
 
 public class Acesso {
     public boolean validaSenha(String user, int password){

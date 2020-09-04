@@ -1,9 +1,12 @@
-package business;
+package DesafioCrud.Business;
+import DesafioCrud.Comuns.Roupa;
+import DesafioCrud.DAO.RoupaDAO;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class RegrasNegocio {
+public class RoupaNegocio {
     public boolean ValidaTxt (File arquivo){
         if (arquivo.exists())
         {
@@ -14,5 +17,11 @@ public class RegrasNegocio {
             File arquivoNovo = new File ("Produto.txt");
         }
         return true;
+    }
+
+    public void Salvar (Roupa roupa){
+        RoupaDAO dao = new RoupaDAO();
+        //fazer a validacao (regra de negocio)
+        dao.salvar(roupa);
     }
 }

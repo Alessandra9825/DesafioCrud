@@ -1,13 +1,25 @@
-package InteracaoFront;
+package DesafioCrud.DAO;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import comuns.Roupa;
+import DesafioCrud.Comuns.*;
 
-public class TratamentoTxt {
+public class RoupaDAO {
+    public boolean ValidaTxt (File arquivo){
+        if (arquivo.exists())
+        {
+            return false;
+        }
+        else
+        {
+            File arquivoNovo = new File ("Produto.txt");
+        }
+        return true;
+    }
 
     public String salvar(Roupa obj)
     {
@@ -29,7 +41,7 @@ public class TratamentoTxt {
         }
         catch (IOException err)
         {
-            Logger.getLogger(TratamentoTxt.class.getName()).log(Level.SEVERE, null, err);
+            Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
         }
         return "Cadastrado com sucesso!";
     }
@@ -44,5 +56,5 @@ public class TratamentoTxt {
     public String consulta(String id)
     {
         return null;
-     }
+    }
 }

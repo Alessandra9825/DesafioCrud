@@ -1,4 +1,4 @@
-package comuns;
+package DesafioCrud.Comuns;
 
 import java.util.Date;
 
