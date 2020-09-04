@@ -1,3 +1,5 @@
+package DesafioCrud.Console;
+
 import DesafioCrud.Business.Acesso;
 
 import java.util.Scanner;
@@ -19,6 +21,7 @@ public class Console {
             password = read.nextInt();
         }while(!Validacao.validaSenha(user,password));
 
+
         System.out.println("Escolha uma opção:");
         System.out.println("1- Inserir produto:");
         System.out.println("2- Remover produto:");
@@ -35,7 +38,7 @@ public class Console {
             case 4:
                 System.out.println("Four");
             default:
-                    System.out.println("Digite SOMENTE números entre 1 e 4");
+                System.out.println("Digite SOMENTE números entre 1 e 4");
                 break;
         }
 

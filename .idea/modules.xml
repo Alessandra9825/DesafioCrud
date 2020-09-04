@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DesafioCrud.Business/DesafioCrud.Business.iml" filepath="$PROJECT_DIR$/DesafioCrud.Business/DesafioCrud.Business.iml" />
       <module fileurl="file://$PROJECT_DIR$/DesafioCrud.Comuns/DesafioCrud.Comuns.iml" filepath="$PROJECT_DIR$/DesafioCrud.Comuns/DesafioCrud.Comuns.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DesafioCrud.Console/DesafioCrud.Console.iml" filepath="$PROJECT_DIR$/DesafioCrud.Console/DesafioCrud.Console.iml" />
       <module fileurl="file://$PROJECT_DIR$/DesafioCrud.DAO/DesafioCrud.DAO.iml" filepath="$PROJECT_DIR$/DesafioCrud.DAO/DesafioCrud.DAO.iml" />
       <module fileurl="file://$PROJECT_DIR$/desafioCrud.iml" filepath="$PROJECT_DIR$/desafioCrud.iml" />
     </modules>

@@ -9,6 +9,8 @@ public class Roupa {
     private String tipo;
     private String marca;
     private String descricao;
+    private enumCor cor;
+    private enumTamanho tamanho;
 
     public int getCodigoItem() {
         return codigoItem;
@@ -59,4 +61,19 @@ public class Roupa {
     }
 
 
+    public enumTamanho getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(enumTamanho tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public enumCor getCor() {
+        return cor;
+    }
+
+    public void setCor(enumCor cor) {
+        this.cor = cor;
+    }
 }
