@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class RoupaNegocio {
-    public boolean ValidaTxt (File arquivo){
+    private boolean ValidaTxt (File arquivo){
         if (arquivo.exists())
         {
             return false;
@@ -24,4 +24,6 @@ public class RoupaNegocio {
         //fazer a validacao (regra de negocio)
         dao.salvar(roupa);
     }
+
+
 }

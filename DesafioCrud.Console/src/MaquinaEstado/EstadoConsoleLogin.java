@@ -1,6 +1,7 @@
 package MaquinaEstado;
 
 import DesafioCrud.Business.Acesso;
+import DesafioCrud.Console.Console;
 
 import java.util.Scanner;
 
@@ -33,8 +34,14 @@ public class EstadoConsoleLogin extends MaquinaEstadoConsole {
             contador--;
         }
 
-        if(contador == 0)
+        if(login)
+            Console.estadoConsole = enumEstadoConsole.HOME.getEstadoConsole();
+        else if(contador == 0){
+            System.out.println();
+            System.out.println("Usuário não conseguiu logar. Saindo....");
             saida = true;
+        }
+
 
         return saida;
     }

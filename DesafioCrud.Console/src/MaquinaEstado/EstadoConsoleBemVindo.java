@@ -26,6 +26,10 @@ public class EstadoConsoleBemVindo extends MaquinaEstadoConsole{
             case 1:
                 Console.estadoConsole = enumEstadoConsole.LOGIN.getEstadoConsole();
                 break;
+            default:
+                System.out.println("Escolha uma opção entre 0 e 1:");
+                opcao = scan.nextInt();
+                break;
         }
 
         return saida;

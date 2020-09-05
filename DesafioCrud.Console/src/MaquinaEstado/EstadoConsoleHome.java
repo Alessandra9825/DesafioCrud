@@ -1,5 +1,7 @@
 package MaquinaEstado;
 
+import DesafioCrud.Console.Console;
+
 import java.util.Scanner;
 
 public class EstadoConsoleHome extends MaquinaEstadoConsole {
@@ -9,31 +11,35 @@ public class EstadoConsoleHome extends MaquinaEstadoConsole {
         Scanner read = new Scanner(System.in);
 
         System.out.println("Escolha uma opção:");
-        System.out.println("1- Inserir produto:");
-        System.out.println("2- Remover produto:");
-        System.out.println("3- Alterar Produto:");
-        System.out.println("4- Consultar produtos:");
-        int opcao = read.nextInt();
+        System.out.println("0- Sair:");
+        System.out.println("1- Inserir um produto:");
+        System.out.println("2- Remover um produto:");
+        System.out.println("3- Alterar um Produto:");
+        System.out.println("4- Consultar um produtos:");
+        int opcao = 9;
 
-        while (opcao != 0){
+        while (opcao >= 5){
+            opcao = read.nextInt();
             switch (opcao){
                 case 0:
                     saida = true;
                     break;
                 case 1:
-                    System.out.println("One");
+                    Console.estadoConsole = enumEstadoConsole.SALVAR.getEstadoConsole();
                     break;
                 case 2:
-                    System.out.println("two");
+                    Console.estadoConsole = enumEstadoConsole.DELETE.getEstadoConsole();
                     break;
                 case 3:
-                    System.out.println("Three");
+                    Console.estadoConsole = enumEstadoConsole.ATUALIZAR.getEstadoConsole();
                     break;
                 case 4:
-                    System.out.println("Four");
+                    Console.estadoConsole = enumEstadoConsole.CONSULTAR.getEstadoConsole();
                     break;
                 default:
+                    System.out.println();
                     System.out.println("Digite SOMENTE números entre 1 e 4");
+                    opcao = read.nextInt();
                     break;
             }
         }

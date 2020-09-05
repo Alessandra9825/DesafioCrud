@@ -9,22 +9,24 @@ import java.util.logging.Logger;
 import DesafioCrud.Comuns.*;
 
 public class RoupaDAO {
-    public boolean ValidaTxt (File arquivo){
-        if (arquivo.exists())
-        {
-            return false;
-        }
-        else
-        {
-            File arquivoNovo = new File ("Produto.txt");
-        }
-        return true;
+
+    private String path = System.getProperty("user.dir");
+
+    private File validaTxt (){
+        File dir = new File(path + "\\Estoque");
+
+        if (!dir.exists())
+            dir.mkdir();
+
+        return dir;
     }
 
     public String salvar(Roupa obj)
     {
         try
         {
+            validaTxt();
+
             FileWriter fw = new FileWriter("Produto.txt");
             PrintWriter pw = new PrintWriter(fw);
             pw.println("codigoItem"+ obj.getCodigoItem());
