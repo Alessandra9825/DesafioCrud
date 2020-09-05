@@ -1,8 +1,12 @@
 package DesafioCrud.Business;
 
 public class Acesso {
-    public boolean validaSenha(String user, int password){
-        if(user.equals("admin")&& password == 12345678)
+    public boolean login(String user, String pass){
+        return validaUsuario(user, pass);
+    }
+
+    private boolean validaUsuario(String user, String password){
+        if(user.equals("admin") && password.equals("1234"))
         {
             return true;
         }
