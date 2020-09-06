@@ -1,7 +1,4 @@
 package DesafioCrud.Console;
-
-import DesafioCrud.Business.Acesso;
-import java.util.Scanner;
 import MaquinaEstado.MaquinaEstadoConsole;
 import MaquinaEstado.enumEstadoConsole;
 

@@ -7,8 +7,6 @@ public class EstadoConsoleBemVindo extends MaquinaEstadoConsole{
 
     @Override
     public boolean Executa() {
-        boolean saida = false;
-
         System.out.println("Seja Bem Vindo !");
         System.out.println();
         System.out.println("Escolha uma opção:");
@@ -16,22 +14,28 @@ public class EstadoConsoleBemVindo extends MaquinaEstadoConsole{
         System.out.println("1 - Login");
 
         Scanner scan = new Scanner(System.in);
-        int opcao = scan.nextInt();
+        int opcao = -1;
 
-        switch(opcao)
-        {
-            case 0:
-                saida = true;
-                break;
-            case 1:
-                Console.estadoConsole = enumEstadoConsole.LOGIN.getEstadoConsole();
-                break;
-            default:
-                System.out.println("Escolha uma opção entre 0 e 1:");
+        while(true){
+            try{
                 opcao = scan.nextInt();
-                break;
+                switch(opcao)
+                {
+                    case 0:
+                        return true;
+                    case 1:
+                        Console.estadoConsole = enumEstadoConsole.LOGIN.getEstadoConsole();
+                        return false;
+                    default:
+                        System.out.println("Escolha uma opção entre 0 e 1:");
+                        break;
+                }
+            }
+            catch (Exception e){
+                System.out.println("Digite somente números entre 0 e 1:");
+                scan.next();
+            }
         }
-
-        return saida;
     }
+
 }

@@ -12,6 +12,10 @@ public class Roupa {
     private String descricao;
     private enumCor cor;
     private enumTamanho tamanho;
+    private double valorCompra;
+    private double valorEtiqueta;
+    private double valorMargem;
+    private double valorSugerido;
 
     public int getCodigoItem() {
         return codigoItem;
@@ -61,7 +65,6 @@ public class Roupa {
         this.descricao = descricao;
     }
 
-
     public enumTamanho getTamanho() {
         return tamanho;
     }
@@ -76,5 +79,37 @@ public class Roupa {
 
     public void setCor(enumCor cor) {
         this.cor = cor;
+    }
+
+    public double getValorCompra() {
+        return valorCompra;
+    }
+
+    public void setValorCompra(double valorCompra) {
+        this.valorCompra = valorCompra;
+    }
+
+    public double getValorEtiqueta() {
+        return valorEtiqueta;
+    }
+
+    public void setValorEtiqueta(double valorEtiqueta) {
+        this.valorEtiqueta = valorEtiqueta;
+    }
+
+    public double getValorMargem() {
+        return valorMargem;
+    }
+
+    public void setValorMargem(double valorMargem) {
+        this.valorMargem = valorMargem;
+    }
+
+    public double getValorSugerido() {
+        return valorSugerido;
+    }
+
+    public void setValorSugerido(double valorSugerido) {
+        this.valorSugerido = valorSugerido;
     }
 }

@@ -17,16 +17,16 @@ public class RoupaDAO {
         FileWriter arquivo;
         if (Files.exists(Paths.get(diretorio)))
         {
-            arquivo = new FileWriter("Produto.txt",true);
+            arquivo = new FileWriter(diretorio,true);
         }
         else
         {
-            arquivo = new FileWriter("Produto.txt");
+            arquivo = new FileWriter(diretorio);
         }
        return arquivo;
     }
 
-    public String salvar(Roupa obj)
+    public Boolean salvar(Roupa obj)
     {
         try
         {
@@ -42,12 +42,14 @@ public class RoupaDAO {
 
             bw.close();
             validaTxt().close();
+            return true;
         }
         catch (IOException err)
         {
             Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
+
+            return false;
         }
-        return "Cadastrado com sucesso!";
     }
 
     public String delete (Roupa obj){
