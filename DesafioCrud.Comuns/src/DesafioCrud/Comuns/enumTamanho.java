@@ -2,12 +2,12 @@ package DesafioCrud.Comuns;
 
 public enum enumTamanho {
 
-    PP("Muito pequeno"),
-    P("Pequeno"),
-    M("Médio"),
-    G("Grande"),
-    GG("Extra Grande"),
-    XG("Super Grande");
+    PP( "PP"),
+    P("P"),
+    M("M"),
+    G("G"),
+    GG("GG"),
+    XG("XG");
 
     private final String tamanho;
 
@@ -15,7 +15,7 @@ public enum enumTamanho {
         this.tamanho = tamanho;
     }
 
-    public String getCor() {
+    public String getTamanho() {
         return tamanho;
     }
 }

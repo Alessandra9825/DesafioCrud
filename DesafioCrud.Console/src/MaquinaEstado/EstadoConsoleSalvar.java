@@ -37,9 +37,21 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
         System.out.println("Descrição");
         obj.setDescricao(read.next());
 
+        System.out.println("Escolha uma cor entre essas opções:");
+        for ( enumCor t : enumCor.values())
+        {
+            System.out.println(t.getCor());
+        }
+        String aux = read.next();
+        obj.setCor(enumCor.valueOf(aux.toUpperCase()));;
 
-        //private enumCor cor;
-        //private enumTamanho tamanho;
+        System.out.println("Escolha uma cor entre essas opções:");
+        for ( enumTamanho t : enumTamanho.values())
+        {
+            System.out.println(t.getTamanho());
+        }
+        aux = read.next();
+        obj.setTamanho(enumTamanho.valueOf(aux.toUpperCase()));;
 
 
         RoupaDAO dao = new RoupaDAO();

@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +37,8 @@ public class RoupaDAO {
             bw.write(obj.getTipo()+",");
             bw.write(obj.getMarca()+",");
             bw.write(obj.getDescricao()+",");
-
+            bw.write(obj.getCor()+",");
+            bw.write(obj.getTamanho()+"\n");
 
             bw.close();
             validaTxt().close();
@@ -56,31 +58,41 @@ public class RoupaDAO {
         return null;
     }
 
-    public String consulta(String id) throws FileNotFoundException
+    public Roupa  consulta(int id) throws FileNotFoundException
     {
-        Roupa h= new Roupa();
+        Roupa consultada = new Roupa();
         try
         {
             ArrayList<Roupa> listProdutos = new ArrayList<>();
+
             FileReader leitor = new FileReader(diretorio);
             BufferedReader leitorBuffer = new BufferedReader(leitor);
             String linha = "";
 
             while ((linha = leitorBuffer.readLine()) != null)
+
             {
                 Roupa produto = new Roupa();
                 String [] info = linha.split(",");
 
                 produto.setCodigoItem(Integer.parseInt(info[0]));
-                produto.setDescricao(info[1]);
+                produto.setDataEntrada(LocalDateTime.parse(info[1]));
+                produto.setLocalCompra(info[2]);
+                produto.setTipo(info[3]);
+                produto.setMarca(info[4]);
+                produto.setDescricao(info[5]);
+                produto.setCor(enumCor.valueOf(info[6]));
+                produto.setTamanho(enumTamanho.valueOf(info[7]));
 
+                listProdutos.add(produto);
             }
-
+             consultada = listProdutos.get(id);
         }
         catch (IOException err)
         {
             Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
         }
-        return id;
+        return consultada;
+
     }
 }
