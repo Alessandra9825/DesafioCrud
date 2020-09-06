@@ -11,7 +11,8 @@ public class Console {
     public static void main(String[] args) {
         estadoConsole = enumEstadoConsole.BEM_VINDO.getEstadoConsole();
         boolean saida = false;
-        while(!saida){
+        while(!saida)
+        {
             saida = estadoConsole.Executa();
         }
     }

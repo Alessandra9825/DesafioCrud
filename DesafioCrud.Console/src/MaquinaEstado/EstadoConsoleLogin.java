@@ -11,7 +11,7 @@ public class EstadoConsoleLogin extends MaquinaEstadoConsole {
         boolean saida = false;
         Acesso access = new Acesso();
         Scanner read = new Scanner(System.in);
-        String password;
+        int password;
         String user;
 
         boolean login = false;
@@ -27,7 +27,7 @@ public class EstadoConsoleLogin extends MaquinaEstadoConsole {
             user = read.next();
 
             System.out.println("Digite sua senha:");
-            password = read.next();
+            password = read.nextInt();
 
             login = access.login(user, password);
 

@@ -1,45 +1,45 @@
 package DesafioCrud.DAO;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import DesafioCrud.Comuns.*;
 
 public class RoupaDAO {
+    public final static String diretorio = "C:\\Repo\\DesafioCrud\\Produto.txt";
 
-    private String path = System.getProperty("user.dir");
-
-    private File validaTxt (){
-        File dir = new File(path + "\\Estoque");
-
-        if (!dir.exists())
-            dir.mkdir();
-
-        return dir;
+    public FileWriter  validaTxt () throws IOException {
+        FileWriter arquivo;
+        if (Files.exists(Paths.get(diretorio)))
+        {
+            arquivo = new FileWriter("Produto.txt",true);
+        }
+        else
+        {
+            arquivo = new FileWriter("Produto.txt");
+        }
+       return arquivo;
     }
 
     public String salvar(Roupa obj)
     {
         try
         {
-            validaTxt();
+            BufferedWriter bw = new BufferedWriter(validaTxt());
+            bw.write(obj.getCodigoItem()+",");
+            bw.write(obj.getDataEntrada()+",");
+            bw.write(obj.getLocalCompra()+",");
+            bw.write(obj.getTipo()+",");
+            bw.write(obj.getMarca()+",");
+            bw.write(obj.getDescricao()+",");
 
-            FileWriter fw = new FileWriter("Produto.txt");
-            PrintWriter pw = new PrintWriter(fw);
-            pw.println("codigoItem"+ obj.getCodigoItem());
-            pw.println("dataEntrada"+obj.getDataEntrada());
-            pw.println("localCompra"+obj.getLocalCompra());
-            pw.println("tipo"+obj.getTipo());
-            pw.println("marca"+obj.getMarca());
-            pw.println("descrição"+obj.getDescricao());
 
-            pw.flush();
-            pw.close();
-            fw.close();
-
+            bw.close();
+            validaTxt().close();
         }
         catch (IOException err)
         {
@@ -55,8 +55,32 @@ public class RoupaDAO {
     {
         return null;
     }
-    public String consulta(String id)
+
+    public String consulta(String id) throws FileNotFoundException
     {
-        return null;
+        Roupa h= new Roupa();
+        try
+        {
+            ArrayList<Roupa> listProdutos = new ArrayList<>();
+            FileReader leitor = new FileReader(diretorio);
+            BufferedReader leitorBuffer = new BufferedReader(leitor);
+            String linha = "";
+
+            while ((linha = leitorBuffer.readLine()) != null)
+            {
+                Roupa produto = new Roupa();
+                String [] info = linha.split(",");
+
+                produto.setCodigoItem(Integer.parseInt(info[0]));
+                produto.setDescricao(info[1]);
+
+            }
+
+        }
+        catch (IOException err)
+        {
+            Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
+        }
+        return id;
     }
 }

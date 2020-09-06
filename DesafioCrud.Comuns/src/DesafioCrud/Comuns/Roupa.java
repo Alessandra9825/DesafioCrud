@@ -1,10 +1,11 @@
 package DesafioCrud.Comuns;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Roupa {
     private int codigoItem;
-    private Date dataEntrada;
+    private LocalDateTime dataEntrada;
     private String localCompra;
     private String tipo;
     private String marca;
@@ -20,11 +21,11 @@ public class Roupa {
         this.codigoItem = codigoItem;
     }
 
-    public Date getDataEntrada() {
+    public LocalDateTime getDataEntrada() {
         return dataEntrada;
     }
 
-    public void setDataEntrada(Date dataEntrada) {
+    public void setDataEntrada(LocalDateTime dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 

@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="DesafioCrud.Business" />
     <orderEntry type="module" module-name="DesafioCrud.Comuns" />
+    <orderEntry type="module" module-name="DesafioCrud.DAO" />
   </component>
 </module>
