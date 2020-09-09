@@ -10,6 +10,7 @@ public class EstadoConsoleHome extends MaquinaEstadoConsole {
         boolean saida = false;
         Scanner read = new Scanner(System.in);
 
+        System.out.println("Menu Principal!");
         System.out.println("Escolha uma opção:");
         System.out.println("0- Sair:");
         System.out.println("1- Inserir um produto:");
@@ -22,7 +23,7 @@ public class EstadoConsoleHome extends MaquinaEstadoConsole {
             opcao = read.nextInt();
             switch (opcao){
                 case 0:
-                    saida = true;
+                    Console.estadoConsole = enumEstadoConsole.BEM_VINDO.getEstadoConsole();
                     break;
                 case 1:
                     Console.estadoConsole = enumEstadoConsole.SALVAR.getEstadoConsole();
@@ -39,7 +40,7 @@ public class EstadoConsoleHome extends MaquinaEstadoConsole {
                 default:
                     System.out.println();
                     System.out.println("Digite SOMENTE números entre 1 e 4");
-                    opcao = read.nextInt();
+                    read.next();
                     break;
             }
         }

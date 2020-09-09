@@ -37,5 +37,4 @@ public class EstadoConsoleBemVindo extends MaquinaEstadoConsole{
             }
         }
     }
-
 }

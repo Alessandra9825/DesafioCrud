@@ -25,7 +25,7 @@ public class RoupaDAO {
        return arquivo;
     }
 
-    public void salvar(Roupa obj) {
+    public boolean salvar(Roupa obj) {
         try
         {
             BufferedWriter bw = new BufferedWriter(validaTxt());
@@ -36,14 +36,20 @@ public class RoupaDAO {
             bw.write(obj.getMarca()+"|");
             bw.write(obj.getDescricao()+"|");
             bw.write(obj.getCor()+"|");
-            bw.write(obj.getTamanho()+"\n");
+            bw.write(obj.getTamanho()+"|");
+            bw.write(obj.getValorCompra()+"|");
+            bw.write(obj.getValorSugerido()+"|");
+            bw.write(obj.getValorEtiqueta()+"|");
+            bw.write(obj.getValorMargem()+"\n");
 
             bw.close();
             validaTxt().close();
+            return true;
         }
         catch (IOException err)
         {
             Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
+            return false;
         }
     }
 
@@ -52,12 +58,12 @@ public class RoupaDAO {
         {
             ArrayList<Roupa> listProdutos = new ArrayList<>();
 
+            validaTxt();
             FileReader leitor = new FileReader(diretorio);
             BufferedReader leitorBuffer = new BufferedReader(leitor);
             String linha;
 
             while ((linha = leitorBuffer.readLine()) != null)
-
             {
                 Roupa produto = new Roupa();
                 String [] info = linha.split("\\|");
@@ -70,42 +76,57 @@ public class RoupaDAO {
                 produto.setDescricao(info[5]);
                 produto.setCor(enumCor.valueOf(info[6]));
                 produto.setTamanho(enumTamanho.valueOf(info[7]));
+                produto.setValorCompra(Double.parseDouble(info[8]));
+                produto.setValorSugerido(Double.parseDouble(info[9]));
+                produto.setValorEtiqueta(Double.parseDouble(info[10]));
+                produto.setValorMargem(Double.parseDouble(info[11]));
 
                 listProdutos.add(produto);
             }
 
-            Roupa consultada ;
+            Roupa consultada;
             consultada = find(id,listProdutos);
-            listProdutos.remove(consultada);
+            if(listProdutos.remove(consultada))
+            {
+                FileWriter arquivo = new FileWriter("Produto.txt",true);
+                Writer limparTxt  = new BufferedWriter( new FileWriter(String.valueOf(arquivo)));
+                limparTxt.close();
 
-            FileWriter arquivo = new FileWriter("Produto.txt",true);
-            Writer limparTxt  = new BufferedWriter( new FileWriter(String.valueOf(arquivo)));
-            limparTxt.close();
+                FileWriter Atualizado = new FileWriter("Produto.txt");
+                BufferedWriter bw = new BufferedWriter(Atualizado);
 
-            FileWriter Atualizado = new FileWriter("Produto.txt");
-            BufferedWriter bw = new BufferedWriter(Atualizado);
+                for (Roupa obj:listProdutos ){
+                    bw.write(obj.getCodigoItem()+"|");
+                    bw.write(obj.getDataEntrada()+"|");
+                    bw.write(obj.getLocalCompra()+"|");
+                    bw.write(obj.getTipo()+"|");
+                    bw.write(obj.getMarca()+"|");
+                    bw.write(obj.getDescricao()+"|");
+                    bw.write(obj.getCor()+"|");
+                    bw.write(obj.getTamanho()+"|");
+                    bw.write(obj.getValorCompra()+"|");
+                    bw.write(obj.getValorSugerido()+"|");
+                    bw.write(obj.getValorEtiqueta()+"|");
+                    bw.write(obj.getValorMargem()+"\n");
+                }
 
-            for (Roupa obj:listProdutos ){
-                bw.write(obj.getCodigoItem()+"|");
-                bw.write(obj.getDataEntrada()+"|");
-                bw.write(obj.getLocalCompra()+"|");
-                bw.write(obj.getTipo()+"|");
-                bw.write(obj.getMarca()+"|");
-                bw.write(obj.getDescricao()+"|");
-                bw.write(obj.getCor()+"|");
-                bw.write(obj.getTamanho()+"\n");
+                bw.close();
+            }
+            else{
+                return "Produto não consta no Estoque!";
             }
 
-            bw.close();
         }
         catch (IOException err)
         {
             Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
         }
-        return "Produto excluido com sucesso !";
+
+        return "Produto excluido com sucesso!";
     }
 
     public String  alterar(Roupa obj) {
+        //validar se o arquivo existe e verificar ops campos que poderam sofrer alteracao
         try
         {
             Roupa nova  = new Roupa();
@@ -117,6 +138,10 @@ public class RoupaDAO {
             nova.setTipo(obj.getTipo());
             nova.setCor(obj.getCor());
             nova.setTamanho(obj.getTamanho());
+            nova.setValorCompra(obj.getValorCompra());
+            nova.setValorSugerido(obj.getValorSugerido());
+            nova.setValorEtiqueta(obj.getValorEtiqueta());
+            nova.setValorMargem(obj.getValorMargem());
 
             delete(obj.getCodigoItem());
             salvar(nova);
@@ -128,18 +153,18 @@ public class RoupaDAO {
         return "Produto alterado com sucesso !!";
     }
 
-    public Roupa  consulta(int id)  {
-        Roupa consultRoup = new Roupa();
+    public Roupa consulta(int id)  {
+        Roupa consultRoupa = new Roupa();
         try
         {
             ArrayList<Roupa> listProdutos = new ArrayList<>();
 
+            validaTxt();
             FileReader leitor = new FileReader(diretorio);
             BufferedReader leitorBuffer = new BufferedReader(leitor);
-            String linha ;
+            String linha;
 
             while ((linha = leitorBuffer.readLine()) != null)
-
             {
                 Roupa produto = new Roupa();
                 String [] info = linha.split("\\|");
@@ -152,20 +177,24 @@ public class RoupaDAO {
                 produto.setDescricao(info[5]);
                 produto.setCor(enumCor.valueOf(info[6]));
                 produto.setTamanho(enumTamanho.valueOf(info[7]));
+                produto.setValorCompra(Double.parseDouble(info[8]));
+                produto.setValorSugerido(Double.parseDouble(info[9]));
+                produto.setValorEtiqueta(Double.parseDouble(info[10]));
+                produto.setValorMargem(Double.parseDouble(info[11]));
 
                 listProdutos.add(produto);
             }
-            consultRoup = find( id, listProdutos);
+            consultRoupa = find(id, listProdutos);
         }
         catch (IOException err)
         {
             Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
         }
-        return consultRoup;
+        return consultRoupa;
     }
 
-    public Roupa find (int id, ArrayList<Roupa> list) {
-        Roupa consultada = new Roupa();
+    private Roupa find (int id, ArrayList<Roupa> list) {
+        Roupa consultada = null;
 
         for (Roupa obj : list)
         {
@@ -174,6 +203,7 @@ public class RoupaDAO {
                 consultada = obj;
             }
         }
+
         return consultada;
     }
 }

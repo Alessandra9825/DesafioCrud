@@ -1,6 +1,7 @@
 package MaquinaEstado;
 
 import DesafioCrud.Business.RoupaNegocio;
+import DesafioCrud.Comuns.ConsoleColors;
 import DesafioCrud.Comuns.Roupa;
 import DesafioCrud.Comuns.enumCor;
 import DesafioCrud.Comuns.enumTamanho;
@@ -28,16 +29,16 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
             obj.setDataEntrada(LocalDateTime.now());
 
             System.out.println("Local da compra:");
-            obj.setLocalCompra(read.next());
+            obj.setLocalCompra(read.nextLine());
 
             System.out.println("Tipo:");
-            obj.setTipo(read.next());
+            obj.setTipo(read.nextLine());
 
             System.out.println("Marca:");
-            obj.setMarca(read.next());
+            obj.setMarca(read.nextLine());
 
             System.out.println("Descrição:");
-            obj.setDescricao(read.next());
+            obj.setDescricao(read.nextLine());
 
             obj.setCor(cor());
             obj.setTamanho(tamanho());
@@ -47,20 +48,46 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
             obj.setValorEtiqueta(valor("Informe o Valor da Etiqueta:"));
             obj.setValorMargem(new RoupaNegocio().valorMargem(obj.getValorCompra()));
 
-            RoupaDAO dao = new RoupaDAO();
-            reg = dao.salvar(obj);
-            saida = !reg;
+            RoupaNegocio business = new RoupaNegocio();
+            reg = business.salvar(obj);
 
-            if(!reg){
-                System.out.println("Erro ao salvar produto!");
+            if(reg){
+                System.out.println(ConsoleColors.YELLOW + "Cadastro realizado com sucesso!" + ConsoleColors.RESET);
             }
-            else{
-                System.out.println("Cadastro realizado com sucesso!");
-                Console.estadoConsole = enumEstadoConsole.HOME.getEstadoConsole();
+            else
+            {
+                reg = !recadastrar();
             }
+
+            saida = !reg;
         }
 
+        Console.estadoConsole = enumEstadoConsole.HOME.getEstadoConsole();
         return saida;
+    }
+
+    private boolean recadastrar(){
+        int resp = -1;
+        while (true){
+            try{
+                System.out.println("Deseja Reiniciar o Cadastro?");
+                System.out.println("0 - Não");
+                System.out.println("1 - Sim");
+                resp = read.nextInt();
+
+                if(resp == 0)
+                    return false;
+                else if (resp == 1)
+                    return true;
+                else
+                    System.out.println(ConsoleColors.RED + "Informe somente 0 ou 1!" + ConsoleColors.RESET);
+            }
+            catch (Exception e)
+            {
+                System.out.println(ConsoleColors.RED + "Informe 0 (sair) ou 1 (recadastrar)!" + ConsoleColors.RESET);
+                read.next();
+            }
+        }
     }
 
     private int codItem(){
@@ -70,11 +97,12 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
                 return read.nextInt();
             }
             catch (Exception e){
-                System.out.println("informe somente números no código!");
+                System.out.println(ConsoleColors.RED + "informe somente números no código!" + ConsoleColors.RESET);
                 read.next();
             }
         }
     }
+
     private enumCor cor(){
         while(true){
             try{
@@ -86,7 +114,7 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
                 return enumCor.valueOf(read.next().toUpperCase());
             }
             catch (Exception e){
-                System.out.println("Cor não conta no catálogo, digite novamente!");
+                System.out.println(ConsoleColors.RED + "Cor não conta no catálogo, digite novamente!" + ConsoleColors.RESET);
             }
         }
     }
@@ -101,10 +129,11 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
                 return enumTamanho.valueOf(read.next().toUpperCase());
             }
             catch (Exception e){
-                System.out.println("Tamanho não consta no catálogo, digite novamente!");
+                System.out.println(ConsoleColors.RED + "Tamanho não consta no catálogo, digite novamente!" + ConsoleColors.RESET);
             }
         }
     }
+
     private double valor(String enunciado){
         while(true){
             try{
@@ -113,7 +142,8 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
                 return read.nextDouble();
             }
             catch (Exception e){
-                System.out.println("Informe somente números com (,) ou (.)!");
+                System.out.println(ConsoleColors.RED + "Informe somente números com (,)" + ConsoleColors.RESET);
+                read.next();
             }
         }
     }
