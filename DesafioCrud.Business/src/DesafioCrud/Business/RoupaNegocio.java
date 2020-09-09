@@ -20,7 +20,6 @@ public class RoupaNegocio {
         RoupaDAO dao = new RoupaDAO();
         boolean correto = true;
 
-        //fazer a validacao (regra de negocio)
         correto = validaObjeto(roupa, true);
 
         if(correto){
@@ -29,18 +28,68 @@ public class RoupaNegocio {
 
         return correto;
     }
+    public boolean delete(int id){
+        RoupaDAO dao = new RoupaDAO();
+        boolean resp = false;
 
+        Roupa consultada = dao.consulta(id);
+
+        if(consultada != null)
+            resp = dao.delete(consultada);
+
+        if(resp){
+            System.out.println(ConsoleColors.YELLOW + "Produto excluido com sucesso!" + ConsoleColors.RESET);
+            return true;
+        }else{
+            System.out.println("Produto não consta no Estoque!");
+            return false;
+        }
+    }
+    public boolean alterar (Roupa object){
+        RoupaDAO dao = new RoupaDAO();
+        boolean obj = validaObjeto(object, false);
+
+        if(obj){
+            dao.alterar(object);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public Roupa consultaID(int codigoItem) {
+        RoupaDAO dao = new RoupaDAO();
+
+        Roupa consultada = dao.consulta(codigoItem);
+        if(Objects.nonNull(consultada)){
+            System.out.println();
+            System.out.println(ConsoleColors.BLUE + "\tRoupas Cadastradas" + ConsoleColors.RESET);
+            return consultada;
+        }
+        else{
+            System.out.println(ConsoleColors.BLUE + "Produto não consta no estoque!" + ConsoleColors.RESET);
+            System.out.println();
+            return null;
+        }
+    }
+    public ArrayList<Roupa> consultaCor(enumCor cor) {
+        RoupaDAO dao = new RoupaDAO();
+        ArrayList<Roupa> consulta = dao.consultaCor(cor);
+        return consulta;
+    }
+    public ArrayList<Roupa> consultaTamanho(enumTamanho tamanho){
+        RoupaDAO dao = new RoupaDAO();
+        ArrayList<Roupa> consulta = dao.consultaTamanho(tamanho);
+        return consulta;
+    }
     public double valorMargem(double valorCompra){
         return valorCompra * 2;
     }
-
     public double ValorSugerido(double valorCompra) {
         System.out.println("Valor Sugerido - R$: " + String.format("%.2f", (valorCompra * 1.3)));
         return valorCompra * 1.3;
     }
-
-    public boolean validaObjeto(Roupa obj, boolean salvar)
-    {
+    public boolean validaObjeto(Roupa obj, boolean salvar){
         RoupaDAO dao = new RoupaDAO();
         List<String> erros = new ArrayList<String>();
 
@@ -76,7 +125,6 @@ public class RoupaNegocio {
         else
             return true;
     }
-
     public enumCor cor(Scanner read){
         while(true){
             try{

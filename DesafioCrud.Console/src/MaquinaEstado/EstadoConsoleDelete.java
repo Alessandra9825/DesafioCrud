@@ -1,5 +1,6 @@
 package MaquinaEstado;
 
+import DesafioCrud.Business.RoupaNegocio;
 import DesafioCrud.Comuns.ConsoleColors;
 import DesafioCrud.Console.Console;
 import DesafioCrud.DAO.RoupaDAO;
@@ -13,10 +14,11 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
     @Override
     public boolean Executa()
     {
+        RoupaNegocio neg = new RoupaNegocio();
         int id = -1;
         boolean resp = false;
         boolean saida = false;
-        RoupaDAO dao = new RoupaDAO();
+        boolean delete = false;
 
         while(!resp){
             try{
@@ -30,9 +32,16 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
                     resp = sairDelete();
                 }
                 else{
-                    System.out.println(dao.delete(id));
-                    resp = sairDelete();
+                    delete = neg.delete(id);
                 }
+
+                if(delete){
+                    System.out.println(ConsoleColors.YELLOW + "Produto excluido com sucesso!" + ConsoleColors.RESET);
+                }else{
+                    System.out.println(ConsoleColors.BLUE + "Produto não consta no Estoque!" + ConsoleColors.RESET);
+                }
+
+                resp = sairDelete();
             }
             catch (Exception e){
                 System.out.println();

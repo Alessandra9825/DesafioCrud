@@ -70,9 +70,9 @@ public class EstadoConsoleAtualizar extends MaquinaEstadoConsole {
                 }
 
                 if(opcao <= 6 && opcao >= 1)
-                    resp = neg.validaObjeto(consultada, false);
+                    resp = neg.alterar(consultada);
 
-                if(resp && dao.alterar(consultada))
+                if(resp)
                     System.out.println(ConsoleColors.YELLOW + "Produto atualizado com sucesso!" + ConsoleColors.RESET);
                 else{
                     resp = !novaAtualizacao();

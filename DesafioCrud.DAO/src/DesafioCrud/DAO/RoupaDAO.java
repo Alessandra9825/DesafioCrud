@@ -53,14 +53,11 @@ public class RoupaDAO {
         }
     }
 
-    public String delete (int id){
+    public boolean delete (Roupa object){
         try
         {
             ArrayList<Roupa> listProdutos = consulta();
-
-            Roupa consultada;
-            consultada = find(id,listProdutos);
-            if(listProdutos.remove(consultada))
+            if(listProdutos.remove(object))
             {
                 FileWriter arquivo = new FileWriter("Produto.txt",true);
                 Writer limparTxt  = new BufferedWriter( new FileWriter(String.valueOf(arquivo)));
@@ -83,20 +80,18 @@ public class RoupaDAO {
                     bw.write(obj.getValorEtiqueta()+"|");
                     bw.write(obj.getValorMargem()+"\n");
                 }
-
                 bw.close();
             }
             else{
-                return "Produto não consta no Estoque!";
+                return false;
             }
-
         }
         catch (IOException err)
         {
             Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
         }
 
-        return ConsoleColors.YELLOW + "Produto excluido com sucesso!" + ConsoleColors.RESET;
+        return true;
     }
 
     public boolean alterar(Roupa obj) {
@@ -117,7 +112,7 @@ public class RoupaDAO {
             nova.setValorEtiqueta(obj.getValorEtiqueta());
             nova.setValorMargem(obj.getValorMargem());
 
-            delete(obj.getCodigoItem());
+            delete(obj);
             salvar(nova);
         }
         catch (Exception err)
@@ -130,7 +125,7 @@ public class RoupaDAO {
     }
 
     public ArrayList<Roupa> consulta()  {
-        ArrayList<Roupa> listProdutos = new ArrayList<>();
+        ArrayList<Roupa> listProdutos = new ArrayList<Roupa>();
 
         try
         {

@@ -54,6 +54,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
             }
             catch (Exception err)
             {
+                System.out.println();
                 System.out.println(ConsoleColors.RED + "Informe somente números!" + ConsoleColors.RESET);
                 read.next();
             }
@@ -63,8 +64,8 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
         return saida;
     }
 
-
     private void mostraObjeto(Roupa obj){
+        System.out.println();
         System.out.println("Codigo: "+ obj.getCodigoItem());
         System.out.println("Data de Entrada: " + obj.getDataEntrada());
         System.out.println("Local de Compra: "+ obj.getLocalCompra());
@@ -81,37 +82,40 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
     }
 
     private void consultarID(){
-        RoupaDAO dao = new RoupaDAO();
+        RoupaNegocio neg = new RoupaNegocio();
+        Roupa obj = new Roupa();
         int codigoItem;
         boolean resp = false;
         while(!resp)
         {
             try
             {
+                System.out.println();
                 System.out.println("Digite o codigo do item que deseja consultar");
                 codigoItem = read.nextInt();
 
                 if(codigoItem <= 0){
-                    System.out.println(ConsoleColors.RED + "Nenhum id é menor ou igual a zero!");
+                    System.out.println();
+                    System.out.println(ConsoleColors.RED + "Nenhum id é menor ou igual a zero!" + ConsoleColors.RESET);
                     resp = sairConsulta();
                 }
                 else{
-                    Roupa consultada = dao.consulta(codigoItem);
-                    if(Objects.nonNull(consultada)){
-                        System.out.println();
-                        System.out.println(ConsoleColors.BLUE + "\tRoupas Cadastradas" + ConsoleColors.RESET);
-                        mostraObjeto(consultada);
-                    }
-                    else{
-                        System.out.println(ConsoleColors.BLUE + "Produto não consta no estoque!" + ConsoleColors.RESET);
-                        System.out.println();
-                    }
-
-                    resp = sairConsulta();
+                    obj = neg.consultaID(codigoItem);
                 }
+
+                if(Objects.nonNull(obj)){
+                    mostraObjeto(obj);
+                }
+                else{
+                    System.out.println();
+                    System.out.println(ConsoleColors.BLUE + "Nenhum produto encontrado!" + ConsoleColors.RESET);
+                }
+
+                resp = sairConsulta();
             }
             catch (Exception err)
             {
+                System.out.println();
                 System.out.println(ConsoleColors.RED + "Informe somente números!" + ConsoleColors.RESET);
                 read.next();
             }
@@ -119,37 +123,38 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
     }
 
     private void consultarCor(){
-        RoupaNegocio negocio = new RoupaNegocio();
-        RoupaDAO dao = new RoupaDAO();
+        RoupaNegocio neg = new RoupaNegocio();
+        ArrayList<Roupa> lista = new ArrayList<Roupa>();
         enumCor cor = null;
         boolean resp = false;
         while(!resp)
         {
             try
             {
-                cor = negocio.cor(read);
+                cor = neg.cor(read);
                 if(Objects.isNull(cor)){
                     //Ja possui um tratamento no metodo;
                     resp = sairConsulta();
                 }
                 else{
-                    ArrayList<Roupa> consulta = dao.consultaCor(cor);
-                    if(Objects.nonNull(consulta)){
+                   lista = neg.consultaCor(cor);
+                    if(!lista.isEmpty()){
                         System.out.println();
                         System.out.println(ConsoleColors.BLUE + "\tRoupas da cor: " + cor.getCor() + ConsoleColors.RESET);
-                        for(Roupa obj : consulta){
+                        for(Roupa obj : lista){
                             mostraObjeto(obj);
                         }
                     }
                     else{
-                        System.out.println(ConsoleColors.BLUE + "Produto não consta no estoque!" + ConsoleColors.RESET);
                         System.out.println();
+                        System.out.println(ConsoleColors.BLUE + "Nenhuma referência encontrada no estoque!" + ConsoleColors.RESET);
                     }
                     resp = sairConsulta();
                 }
             }
             catch (Exception err)
             {
+                System.out.println();
                 System.out.println(ConsoleColors.RED + "Informe somente números!" + ConsoleColors.RESET);
                 read.next();
             }
@@ -157,37 +162,38 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
     }
 
     private void consultaTamanho(){
-        RoupaNegocio negocio = new RoupaNegocio();
-        RoupaDAO dao = new RoupaDAO();
+        RoupaNegocio neg = new RoupaNegocio();
+        ArrayList<Roupa> lista = new ArrayList<Roupa>();
         enumTamanho tamanho = null;
         boolean resp = false;
         while(!resp)
         {
             try
             {
-                tamanho = negocio.tamanho(read);
+                tamanho = neg.tamanho(read);
                 if(Objects.isNull(tamanho)){
                     //Ja possui um tratamento no metodo;
                     resp = sairConsulta();
                 }
                 else{
-                    ArrayList<Roupa> consulta = dao.consultaTamanho(tamanho);
-                    if(Objects.nonNull(consulta)){
+                   lista = neg.consultaTamanho(tamanho);
+                    if(!lista.isEmpty()){
                         System.out.println();
                         System.out.println(ConsoleColors.BLUE + "\tRoupas do tamanho: " + tamanho.getTamanho() + ConsoleColors.RESET);
-                        for(Roupa obj : consulta){
+                        for(Roupa obj : lista){
                             mostraObjeto(obj);
                         }
                     }
                     else{
-                        System.out.println(ConsoleColors.BLUE + "Produto não consta no estoque!" + ConsoleColors.RESET);
                         System.out.println();
+                        System.out.println(ConsoleColors.BLUE + "Nenhuma referência encontrada no estoque!" + ConsoleColors.RESET);
                     }
                     resp = sairConsulta();
                 }
             }
             catch (Exception err)
             {
+                System.out.println();
                 System.out.println(ConsoleColors.RED + "Informe somente números!" + ConsoleColors.RESET);
                 read.next();
             }
