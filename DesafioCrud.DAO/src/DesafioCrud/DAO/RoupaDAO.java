@@ -96,10 +96,10 @@ public class RoupaDAO {
             Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
         }
 
-        return "Produto excluido com sucesso!";
+        return ConsoleColors.YELLOW + "Produto excluido com sucesso!" + ConsoleColors.RESET;
     }
 
-    public String  alterar(Roupa obj) {
+    public boolean alterar(Roupa obj) {
         //validar se o arquivo existe e verificar ops campos que poderam sofrer alteracao
         try
         {
@@ -123,8 +123,10 @@ public class RoupaDAO {
         catch (Exception err)
         {
             Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
+            return false;
         }
-        return "Produto alterado com sucesso !!";
+
+        return true;
     }
 
     public ArrayList<Roupa> consulta()  {

@@ -10,6 +10,7 @@ public class EstadoConsoleHome extends MaquinaEstadoConsole {
         boolean saida = false;
         Scanner read = new Scanner(System.in);
 
+        System.out.println();
         System.out.println("Menu Principal!");
         System.out.println("Escolha uma opção:");
         System.out.println("0- Sair:");

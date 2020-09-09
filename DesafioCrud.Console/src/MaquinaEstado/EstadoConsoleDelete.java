@@ -20,10 +20,12 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
 
         while(!resp){
             try{
+                System.out.println();
                 System.out.println("Informe o Id do produto:");
                 id = read.nextInt();
 
                 if(id <= 0){
+                    System.out.println();
                     System.out.println(ConsoleColors.RED + "Não existe ID's menores do que zero!" + ConsoleColors.RESET);
                     resp = sairDelete();
                 }
@@ -33,6 +35,7 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
                 }
             }
             catch (Exception e){
+                System.out.println();
                 System.out.println(ConsoleColors.RED + "Informe somenete números no ID!" + ConsoleColors.RESET);
                 read.next();
             }
@@ -46,6 +49,7 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
         int resp = -1;
         while (true){
             try{
+                System.out.println();
                 System.out.println("Deseja tentar uma nova exclusão?");
                 System.out.println("0 - Não");
                 System.out.println("1 - Sim");
@@ -60,6 +64,7 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
             }
             catch (Exception e)
             {
+                System.out.println();
                 System.out.println(ConsoleColors.RED + "Informe 0 (Sair) ou 1 (nova Exclusão)!" + ConsoleColors.RESET);
                 read.next();
             }

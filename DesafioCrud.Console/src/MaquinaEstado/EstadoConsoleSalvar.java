@@ -25,34 +25,43 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
         Scanner read = new Scanner(System.in);
 
         while(!reg){
+            System.out.println();
             System.out.println("Informe: ");
             obj.setCodigoItem(codItem());
             obj.setDataEntrada(LocalDateTime.now());
 
+            System.out.println();
             System.out.println("Local da compra:");
             obj.setLocalCompra(read.nextLine());
 
+            System.out.println();
             System.out.println("Tipo:");
             obj.setTipo(read.nextLine());
 
+            System.out.println();
             System.out.println("Marca:");
             obj.setMarca(read.nextLine());
 
+            System.out.println();
             System.out.println("Descrição:");
             obj.setDescricao(read.nextLine());
 
             obj.setCor(neg.cor(read));
             obj.setTamanho(neg.tamanho(read));
 
+            System.out.println();
             obj.setValorCompra(valor("Informe o Valor da Compra:"));
-            obj.setValorSugerido(new RoupaNegocio().ValorSugerido(obj.getValorCompra()));
+            obj.setValorSugerido(neg.ValorSugerido(obj.getValorCompra()));
+
+            System.out.println();
             obj.setValorEtiqueta(valor("Informe o Valor da Etiqueta:"));
-            obj.setValorMargem(new RoupaNegocio().valorMargem(obj.getValorCompra()));
+            obj.setValorMargem(neg.valorMargem(obj.getValorCompra()));
 
             RoupaNegocio business = new RoupaNegocio();
             reg = business.salvar(obj);
 
             if(reg){
+                System.out.println();
                 System.out.println(ConsoleColors.YELLOW + "Cadastro realizado com sucesso!" + ConsoleColors.RESET);
             }
             else
@@ -94,6 +103,7 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
     private int codItem(){
         while(true){
             try{
+                System.out.println();
                 System.out.println("Codigo do Item:");
                 return read.nextInt();
             }

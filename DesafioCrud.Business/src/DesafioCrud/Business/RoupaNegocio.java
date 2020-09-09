@@ -16,16 +16,12 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class RoupaNegocio {
-    //salvar - validar se id ja existe
-    //salvar - validar campos vazios, valores com letras etc
-    //delete - validar se existe id
-
     public boolean salvar (Roupa roupa){
         RoupaDAO dao = new RoupaDAO();
         boolean correto = true;
 
         //fazer a validacao (regra de negocio)
-        correto = validaObjeto(roupa);
+        correto = validaObjeto(roupa, true);
 
         if(correto){
             dao.salvar(roupa);
@@ -33,8 +29,6 @@ public class RoupaNegocio {
 
         return correto;
     }
-
-    private int codigoItem;
 
     public double valorMargem(double valorCompra){
         return valorCompra * 2;
@@ -45,7 +39,7 @@ public class RoupaNegocio {
         return valorCompra * 1.3;
     }
 
-    public boolean validaObjeto(Roupa obj)
+    public boolean validaObjeto(Roupa obj, boolean salvar)
     {
         RoupaDAO dao = new RoupaDAO();
         List<String> erros = new ArrayList<String>();
@@ -66,7 +60,7 @@ public class RoupaNegocio {
             erros.add("Descrição está em branco, informe uam descrição!");
         }
 
-        if(Objects.nonNull(dao.consulta(obj.getCodigoItem()))){
+        if(salvar && Objects.nonNull(dao.consulta(obj.getCodigoItem()))){
             erros.add("Produto com ID existente!");
         }
 
@@ -86,6 +80,7 @@ public class RoupaNegocio {
     public enumCor cor(Scanner read){
         while(true){
             try{
+                System.out.println();
                 System.out.println("Escolha uma cor entre essas opções:");
                 for ( enumCor t : enumCor.values())
                 {
@@ -101,6 +96,7 @@ public class RoupaNegocio {
     public enumTamanho tamanho(Scanner read){
         while(true){
             try{
+                System.out.println();
                 System.out.println("Escolha uma cor entre essas opções:");
                 for ( enumTamanho t : enumTamanho.values())
                 {

@@ -1,6 +1,7 @@
 package MaquinaEstado;
 
 import DesafioCrud.Business.Acesso;
+import DesafioCrud.Comuns.ConsoleColors;
 import DesafioCrud.Console.Console;
 
 import java.util.Scanner;
@@ -16,20 +17,28 @@ public class EstadoConsoleLogin extends MaquinaEstadoConsole {
 
         boolean login = false;
         int contador = 3;
-        while( contador == 0 || !login)
+        while( contador > 0 && !login)
         {
-            if(contador != 3){
-                System.out.println("Usuário ou senha inválidos - restam: " + contador + " Tentativas!");
+            try{
+                if(contador != 3){
+                    System.out.println("Usuário ou senha inválidos - restam: " + contador + " Tentativas!");
+                }
+
                 System.out.println();
+                System.out.println("Digite seu usuario:");
+                user = read.next();
+
+                System.out.println();
+                System.out.println("Digite sua senha:");
+                password = read.nextInt();
+
+                login = access.login(user, password);
             }
-
-            System.out.println("Digite seu usuario:");
-            user = read.next();
-
-            System.out.println("Digite sua senha:");
-            password = read.nextInt();
-
-            login = access.login(user, password);
+            catch(Exception e){
+                System.out.println();
+                System.out.println(ConsoleColors.RED + "Digite somente numeros na senha!" + ConsoleColors.RESET);
+                read.next();
+            }
 
             contador--;
         }

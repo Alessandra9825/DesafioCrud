@@ -24,6 +24,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
         {
             try
             {
+                System.out.println();
                 System.out.println("Digite a opção de consulta desejada: ");
                 System.out.println("0 - Sair");
                 System.out.println("1 - Consulta por ID");
@@ -97,6 +98,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
                 else{
                     Roupa consultada = dao.consulta(codigoItem);
                     if(Objects.nonNull(consultada)){
+                        System.out.println();
                         System.out.println(ConsoleColors.BLUE + "\tRoupas Cadastradas" + ConsoleColors.RESET);
                         mostraObjeto(consultada);
                     }
@@ -133,6 +135,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
                 else{
                     ArrayList<Roupa> consulta = dao.consultaCor(cor);
                     if(Objects.nonNull(consulta)){
+                        System.out.println();
                         System.out.println(ConsoleColors.BLUE + "\tRoupas da cor: " + cor.getCor() + ConsoleColors.RESET);
                         for(Roupa obj : consulta){
                             mostraObjeto(obj);
@@ -170,6 +173,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
                 else{
                     ArrayList<Roupa> consulta = dao.consultaTamanho(tamanho);
                     if(Objects.nonNull(consulta)){
+                        System.out.println();
                         System.out.println(ConsoleColors.BLUE + "\tRoupas do tamanho: " + tamanho.getTamanho() + ConsoleColors.RESET);
                         for(Roupa obj : consulta){
                             mostraObjeto(obj);
