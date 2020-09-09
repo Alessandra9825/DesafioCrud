@@ -39,7 +39,7 @@ public class EstadoConsoleHome extends MaquinaEstadoConsole {
                     break;
                 default:
                     System.out.println();
-                    System.out.println("Digite SOMENTE números entre 1 e 4");
+                    System.out.println("Digite SOMENTE números entre 0 e 4");
                     read.next();
                     break;
             }

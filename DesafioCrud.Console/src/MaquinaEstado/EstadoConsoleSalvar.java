@@ -21,6 +21,7 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
         boolean saida = false;
 
         Roupa obj = new Roupa();
+        RoupaNegocio neg = new RoupaNegocio();
         Scanner read = new Scanner(System.in);
 
         while(!reg){
@@ -40,8 +41,8 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
             System.out.println("Descrição:");
             obj.setDescricao(read.nextLine());
 
-            obj.setCor(cor());
-            obj.setTamanho(tamanho());
+            obj.setCor(neg.cor(read));
+            obj.setTamanho(neg.tamanho(read));
 
             obj.setValorCompra(valor("Informe o Valor da Compra:"));
             obj.setValorSugerido(new RoupaNegocio().ValorSugerido(obj.getValorCompra()));
@@ -99,37 +100,6 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
             catch (Exception e){
                 System.out.println(ConsoleColors.RED + "informe somente números no código!" + ConsoleColors.RESET);
                 read.next();
-            }
-        }
-    }
-
-    private enumCor cor(){
-        while(true){
-            try{
-                System.out.println("Escolha uma cor entre essas opções:");
-                for ( enumCor t : enumCor.values())
-                {
-                    System.out.println(t.getCor());
-                }
-                return enumCor.valueOf(read.next().toUpperCase());
-            }
-            catch (Exception e){
-                System.out.println(ConsoleColors.RED + "Cor não conta no catálogo, digite novamente!" + ConsoleColors.RESET);
-            }
-        }
-    }
-    private enumTamanho tamanho(){
-        while(true){
-            try{
-                System.out.println("Escolha uma cor entre essas opções:");
-                for ( enumTamanho t : enumTamanho.values())
-                {
-                    System.out.println(t.getTamanho());
-                }
-                return enumTamanho.valueOf(read.next().toUpperCase());
-            }
-            catch (Exception e){
-                System.out.println(ConsoleColors.RED + "Tamanho não consta no catálogo, digite novamente!" + ConsoleColors.RESET);
             }
         }
     }

@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class RoupaNegocio {
     //salvar - validar se id ja existe
@@ -80,5 +81,36 @@ public class RoupaNegocio {
         }
         else
             return true;
+    }
+
+    public enumCor cor(Scanner read){
+        while(true){
+            try{
+                System.out.println("Escolha uma cor entre essas opções:");
+                for ( enumCor t : enumCor.values())
+                {
+                    System.out.println(t.getCor());
+                }
+                return enumCor.valueOf(read.next().toUpperCase());
+            }
+            catch (Exception e){
+                System.out.println(ConsoleColors.RED + "Cor não conta no catálogo, digite novamente!" + ConsoleColors.RESET);
+            }
+        }
+    }
+    public enumTamanho tamanho(Scanner read){
+        while(true){
+            try{
+                System.out.println("Escolha uma cor entre essas opções:");
+                for ( enumTamanho t : enumTamanho.values())
+                {
+                    System.out.println(t.getTamanho());
+                }
+                return enumTamanho.valueOf(read.next().toUpperCase());
+            }
+            catch (Exception e){
+                System.out.println(ConsoleColors.RED + "Tamanho não consta no catálogo, digite novamente!" + ConsoleColors.RESET);
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ import DesafioCrud.Comuns.*;
 public class RoupaDAO {
     public final static String diretorio = System.getProperty("user.dir")+"\\Produto.txt";
 
-    public FileWriter  validaTxt () throws IOException {
+    private FileWriter  validaTxt () throws IOException {
         FileWriter arquivo;
         if (Files.exists(Paths.get(diretorio)))
         {
@@ -53,36 +53,10 @@ public class RoupaDAO {
         }
     }
 
-    public String delete ( int id){
+    public String delete (int id){
         try
         {
-            ArrayList<Roupa> listProdutos = new ArrayList<>();
-
-            validaTxt();
-            FileReader leitor = new FileReader(diretorio);
-            BufferedReader leitorBuffer = new BufferedReader(leitor);
-            String linha;
-
-            while ((linha = leitorBuffer.readLine()) != null)
-            {
-                Roupa produto = new Roupa();
-                String [] info = linha.split("\\|");
-
-                produto.setCodigoItem(Integer.parseInt(info[0]));
-                produto.setDataEntrada(LocalDateTime.parse(info[1]));
-                produto.setLocalCompra(info[2]);
-                produto.setTipo(info[3]);
-                produto.setMarca(info[4]);
-                produto.setDescricao(info[5]);
-                produto.setCor(enumCor.valueOf(info[6]));
-                produto.setTamanho(enumTamanho.valueOf(info[7]));
-                produto.setValorCompra(Double.parseDouble(info[8]));
-                produto.setValorSugerido(Double.parseDouble(info[9]));
-                produto.setValorEtiqueta(Double.parseDouble(info[10]));
-                produto.setValorMargem(Double.parseDouble(info[11]));
-
-                listProdutos.add(produto);
-            }
+            ArrayList<Roupa> listProdutos = consulta();
 
             Roupa consultada;
             consultada = find(id,listProdutos);
@@ -153,12 +127,11 @@ public class RoupaDAO {
         return "Produto alterado com sucesso !!";
     }
 
-    public Roupa consulta(int id)  {
-        Roupa consultRoupa = new Roupa();
+    public ArrayList<Roupa> consulta()  {
+        ArrayList<Roupa> listProdutos = new ArrayList<>();
+
         try
         {
-            ArrayList<Roupa> listProdutos = new ArrayList<>();
-
             validaTxt();
             FileReader leitor = new FileReader(diretorio);
             BufferedReader leitorBuffer = new BufferedReader(leitor);
@@ -184,13 +157,43 @@ public class RoupaDAO {
 
                 listProdutos.add(produto);
             }
-            consultRoupa = find(id, listProdutos);
         }
         catch (IOException err)
         {
             Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
+
+            return null;
         }
+
+        return listProdutos;
+    }
+
+    public Roupa consulta(int id)  {
+        Roupa consultRoupa = null;
+
+        try
+        {
+            ArrayList<Roupa> listProdutos = consulta();
+            consultRoupa = find(id, listProdutos);
+        }
+        catch (Exception e)
+        {
+            Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+
         return consultRoupa;
+    }
+
+    public ArrayList<Roupa> consultaCor(enumCor cor){
+        ArrayList<Roupa> listaProdutos = consulta();
+        listaProdutos.removeIf(obj -> (obj.getCor() != cor));
+        return listaProdutos;
+    }
+
+    public ArrayList<Roupa> consultaTamanho(enumTamanho tamanho){
+        ArrayList<Roupa> listaProdutos = consulta();
+        listaProdutos.removeIf(obj -> (obj.getTamanho() != tamanho));
+        return listaProdutos;
     }
 
     private Roupa find (int id, ArrayList<Roupa> list) {
@@ -206,4 +209,5 @@ public class RoupaDAO {
 
         return consultada;
     }
+
 }
