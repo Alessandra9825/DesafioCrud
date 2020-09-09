@@ -57,7 +57,7 @@ public class RoupaDAO {
         try
         {
             ArrayList<Roupa> listProdutos = consulta();
-            if(listProdutos.remove(object))
+            if(listProdutos.removeIf(roupa -> (roupa.getCodigoItem() == object.getCodigoItem())))
             {
                 FileWriter arquivo = new FileWriter("Produto.txt",true);
                 Writer limparTxt  = new BufferedWriter( new FileWriter(String.valueOf(arquivo)));

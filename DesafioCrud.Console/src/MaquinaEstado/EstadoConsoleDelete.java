@@ -31,15 +31,6 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
                     System.out.println(ConsoleColors.RED + "Não existe ID's menores do que zero!" + ConsoleColors.RESET);
                     resp = sairDelete();
                 }
-                else{
-                    delete = neg.delete(id);
-                }
-
-                if(delete){
-                    System.out.println(ConsoleColors.YELLOW + "Produto excluido com sucesso!" + ConsoleColors.RESET);
-                }else{
-                    System.out.println(ConsoleColors.BLUE + "Produto não consta no Estoque!" + ConsoleColors.RESET);
-                }
 
                 resp = sairDelete();
             }
