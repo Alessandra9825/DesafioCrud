@@ -19,6 +19,7 @@ public class EstadoConsoleBemVindo extends MaquinaEstadoConsole{
         while(true){
             try{
                 opcao = scan.nextInt();
+                scan.nextLine();
                 switch(opcao)
                 {
                     case 0:
@@ -33,7 +34,6 @@ public class EstadoConsoleBemVindo extends MaquinaEstadoConsole{
             }
             catch (Exception e){
                 System.out.println("Digite somente números entre 0 e 1:");
-                scan.next();
             }
         }
     }

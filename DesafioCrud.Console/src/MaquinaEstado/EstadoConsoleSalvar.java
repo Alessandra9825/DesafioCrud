@@ -95,21 +95,28 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
             catch (Exception e)
             {
                 System.out.println(ConsoleColors.RED + "Informe 0 (sair) ou 1 (recadastrar)!" + ConsoleColors.RESET);
-                read.next();
+                read.nextLine();
             }
         }
     }
 
     private int codItem(){
+        int id = -1;
         while(true){
             try{
                 System.out.println();
                 System.out.println("Codigo do Item:");
-                return read.nextInt();
+                id =  read.nextInt();
+                read.nextLine();
+
+                if(id <= 0)
+                    System.out.println(ConsoleColors.RED + "informe códigos maiores que 0!" + ConsoleColors.RESET);
+                else
+                    return id;
             }
             catch (Exception e){
                 System.out.println(ConsoleColors.RED + "informe somente números no código!" + ConsoleColors.RESET);
-                read.next();
+                read.nextLine();
             }
         }
     }
@@ -123,7 +130,7 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
             }
             catch (Exception e){
                 System.out.println(ConsoleColors.RED + "Informe somente números com (,)" + ConsoleColors.RESET);
-                read.next();
+                read.nextLine();
             }
         }
     }

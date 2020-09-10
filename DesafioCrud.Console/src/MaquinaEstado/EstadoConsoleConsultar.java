@@ -219,6 +219,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
             catch (Exception e)
             {
                 System.out.println(ConsoleColors.RED + "Informe 0 (Sair) ou 1 (Consultar)!" + ConsoleColors.RESET);
+                read.nextLine();
             }
         }
     }

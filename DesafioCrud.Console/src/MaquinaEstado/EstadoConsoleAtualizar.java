@@ -39,24 +39,25 @@ public class EstadoConsoleAtualizar extends MaquinaEstadoConsole {
                 System.out.println("6- Tamanho");
 
                 int opcao = read.nextInt();
+                read.nextLine();
 
                 switch (opcao)
                 {
                     case 1:
                         System.out.println("Local da compra:");
-                        consultada.setLocalCompra(read.next());
+                        consultada.setLocalCompra(read.nextLine());
                         break;
                     case 2:
                         System.out.println("Tipo:");
-                        consultada.setTipo(read.next());
+                        consultada.setTipo(read.nextLine());
                         break;
                     case 3:
                         System.out.println("Marca:");
-                        consultada.setMarca(read.next());
+                        consultada.setMarca(read.nextLine());
                         break;
                     case 4 :
                         System.out.println("Descrição:");
-                        consultada.setDescricao(read.next());
+                        consultada.setDescricao(read.nextLine());
                         break;
                     case 5 :
                         consultada.setCor(neg.cor(read));
@@ -97,6 +98,7 @@ public class EstadoConsoleAtualizar extends MaquinaEstadoConsole {
                 System.out.println("0 - Não");
                 System.out.println("1 - Sim");
                 resp = read.nextInt();
+                read.nextLine();
 
                 if(resp == 0)
                     return false;
@@ -108,7 +110,6 @@ public class EstadoConsoleAtualizar extends MaquinaEstadoConsole {
             catch (Exception e)
             {
                 System.out.println(ConsoleColors.RED + "Informe 0 (sair) ou 1 (Atualizar)!" + ConsoleColors.RESET);
-                read.next();
             }
         }
     }

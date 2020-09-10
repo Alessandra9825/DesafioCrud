@@ -37,7 +37,7 @@ public class EstadoConsoleLogin extends MaquinaEstadoConsole {
             catch(Exception e){
                 System.out.println();
                 System.out.println(ConsoleColors.RED + "Digite somente numeros na senha!" + ConsoleColors.RESET);
-                read.next();
+                read.nextLine();
             }
 
             contador--;

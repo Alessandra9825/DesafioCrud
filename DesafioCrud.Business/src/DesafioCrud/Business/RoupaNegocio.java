@@ -123,7 +123,7 @@ public class RoupaNegocio {
 
         if(erros.size() > 0){
             System.out.println();
-            System.out.println(ConsoleColors.RED + "Erros ao cadastrar novo produto!" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "Erros!" + ConsoleColors.RESET);
             for(String e : erros){
                 System.out.println(e);
             }

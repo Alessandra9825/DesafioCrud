@@ -60,13 +60,16 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
                     return true;
                 else if (resp == 1)
                     return false;
-                else
+                else{
                     System.out.println(ConsoleColors.RED + "Informe somente 0 ou 1!" + ConsoleColors.RESET);
+                    read.nextLine();
+                }
             }
             catch (Exception e)
             {
                 System.out.println();
                 System.out.println(ConsoleColors.RED + "Informe 0 (Sair) ou 1 (nova Exclusão)!" + ConsoleColors.RESET);
+                read.nextLine();
             }
         }
     }
