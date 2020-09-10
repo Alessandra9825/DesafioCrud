@@ -1,2 +1,4 @@
 2|2020-09-08T23:31:18.776|buzios|Camiseta|x|Camiseta legal|AZUL|GG|100.0|130.0|150.0|200.0
 1|2020-09-08T18:39:20.877|Buzios|Camiseta|Lacoste|Camisetinha|VERDE|G|123.25|160.225|200.0|246.5
+5|2020-09-09T21:07:09.872|asd|asd|asd|asdf|AZUL|PP|10.0|13.0|15.0|20.0
+6|2020-09-09T21:16:36.388|Marechal|Camisa|TXT|NAo sei|BRANCO|PP|10.0|13.0|15.0|20.0
