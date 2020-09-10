@@ -28,6 +28,7 @@ public class RoupaNegocio {
 
         return correto;
     }
+
     public boolean delete(int id){
         RoupaDAO dao = new RoupaDAO();
         boolean resp = false;
@@ -45,6 +46,7 @@ public class RoupaNegocio {
             return false;
         }
     }
+
     public boolean alterar (Roupa object){
         RoupaDAO dao = new RoupaDAO();
         boolean obj = validaObjeto(object, false);
@@ -57,6 +59,7 @@ public class RoupaNegocio {
             return false;
         }
     }
+
     public Roupa consultaID(int codigoItem) {
         RoupaDAO dao = new RoupaDAO();
 
@@ -72,23 +75,28 @@ public class RoupaNegocio {
             return null;
         }
     }
+
     public ArrayList<Roupa> consultaCor(enumCor cor) {
         RoupaDAO dao = new RoupaDAO();
         ArrayList<Roupa> consulta = dao.consultaCor(cor);
         return consulta;
     }
+
     public ArrayList<Roupa> consultaTamanho(enumTamanho tamanho){
         RoupaDAO dao = new RoupaDAO();
         ArrayList<Roupa> consulta = dao.consultaTamanho(tamanho);
         return consulta;
     }
+
     public double valorMargem(double valorCompra){
         return valorCompra * 2;
     }
+
     public double ValorSugerido(double valorCompra) {
         System.out.println("Valor Sugerido - R$: " + String.format("%.2f", (valorCompra * 1.3)));
         return valorCompra * 1.3;
     }
+
     public boolean validaObjeto(Roupa obj, boolean salvar){
         RoupaDAO dao = new RoupaDAO();
         List<String> erros = new ArrayList<String>();
@@ -125,6 +133,7 @@ public class RoupaNegocio {
         else
             return true;
     }
+
     public enumCor cor(Scanner read){
         while(true){
             try{
@@ -141,6 +150,7 @@ public class RoupaNegocio {
             }
         }
     }
+
     public enumTamanho tamanho(Scanner read){
         while(true){
             try{

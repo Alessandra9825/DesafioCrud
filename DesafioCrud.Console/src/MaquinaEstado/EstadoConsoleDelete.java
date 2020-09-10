@@ -32,6 +32,7 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
                     resp = sairDelete();
                 }
 
+                neg.delete(id);
                 resp = sairDelete();
             }
             catch (Exception e){
@@ -66,7 +67,6 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
             {
                 System.out.println();
                 System.out.println(ConsoleColors.RED + "Informe 0 (Sair) ou 1 (nova Exclusão)!" + ConsoleColors.RESET);
-                read.next();
             }
         }
     }
