@@ -1,9 +1,12 @@
-package DesafioCrud.Comuns;
+package DesafioCrud.Comuns.vos;
+
+import DesafioCrud.Comuns.Basis.Entidade;
+import DesafioCrud.Comuns.Enuns.enumCor;
+import DesafioCrud.Comuns.Enuns.enumTamanho;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
-public class Roupa {
+public class Roupa extends Entidade {
     private int codigoItem;
     private LocalDateTime dataEntrada;
     private String localCompra;

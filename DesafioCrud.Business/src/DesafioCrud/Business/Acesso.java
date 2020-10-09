@@ -1,11 +1,20 @@
 package DesafioCrud.Business;
 
+import Basis.FabricaRepositorio;
+import DesafioCrud.Comuns.Enuns.enumEntidade;
+import DesafioCrud.Comuns.vos.Usuario;
+import Repositorio.Repositorio;
+
 public class Acesso {
-    public boolean login(String user, int pass){
-        return validaUsuario(user, pass);
+    private boolean validaSenha(Usuario userRepo, Usuario user){
+        return userRepo.getSenha().equals(user.getSenha());
     }
 
-    private boolean validaUsuario(String user, int password){
-        return user.equals("admin") && password == 12345678;
+    public boolean validaUsuario(Usuario user){
+        Repositorio repositorio = FabricaRepositorio.Fabrica();
+        Usuario usuario = (Usuario)repositorio.localiza(user.getLogin(), enumEntidade.USUARIO);
+        if(usuario != null)
+            return validaSenha(usuario, user);
+        return false;
     }
 }

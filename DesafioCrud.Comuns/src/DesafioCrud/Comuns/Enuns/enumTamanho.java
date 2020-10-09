@@ -1,4 +1,4 @@
-package DesafioCrud.Comuns;
+package DesafioCrud.Comuns.Enuns;
 
 public enum enumTamanho {
 

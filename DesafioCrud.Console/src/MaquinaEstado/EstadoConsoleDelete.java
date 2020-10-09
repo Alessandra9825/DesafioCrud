@@ -1,12 +1,10 @@
 package MaquinaEstado;
 
 import DesafioCrud.Business.RoupaNegocio;
-import DesafioCrud.Comuns.ConsoleColors;
+import DesafioCrud.Comuns.Enuns.enumConsoleColors;
 import DesafioCrud.Console.Console;
-import DesafioCrud.DAO.RoupaDAO;
 
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 public class EstadoConsoleDelete extends MaquinaEstadoConsole {
     private Scanner read = new Scanner(System.in);
@@ -28,7 +26,7 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
 
                 if(id <= 0){
                     System.out.println();
-                    System.out.println(ConsoleColors.RED + "Não existe ID's menores do que zero!" + ConsoleColors.RESET);
+                    System.out.println(enumConsoleColors.RED + "Não existe ID's menores do que zero!" + enumConsoleColors.RESET);
                     resp = sairDelete();
                 }
 
@@ -37,7 +35,7 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
             }
             catch (Exception e){
                 System.out.println();
-                System.out.println(ConsoleColors.RED + "Informe somenete números no ID!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Informe somenete números no ID!" + enumConsoleColors.RESET);
                 read.next();
             }
         }
@@ -61,14 +59,14 @@ public class EstadoConsoleDelete extends MaquinaEstadoConsole {
                 else if (resp == 1)
                     return false;
                 else{
-                    System.out.println(ConsoleColors.RED + "Informe somente 0 ou 1!" + ConsoleColors.RESET);
+                    System.out.println(enumConsoleColors.RED + "Informe somente 0 ou 1!" + enumConsoleColors.RESET);
                     read.nextLine();
                 }
             }
             catch (Exception e)
             {
                 System.out.println();
-                System.out.println(ConsoleColors.RED + "Informe 0 (Sair) ou 1 (nova Exclusão)!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Informe 0 (Sair) ou 1 (nova Exclusão)!" + enumConsoleColors.RESET);
                 read.nextLine();
             }
         }

@@ -1,6 +1,6 @@
 package MaquinaEstado;
 
-import DesafioCrud.Comuns.ConsoleColors;
+import DesafioCrud.Comuns.Enuns.enumConsoleColors;
 import DesafioCrud.Console.Console;
 
 import java.util.Scanner;
@@ -49,7 +49,7 @@ public class EstadoConsoleHome extends MaquinaEstadoConsole {
             }
         }
         catch (Exception e){
-            System.out.println(ConsoleColors.RED + "Informe somente números!" + ConsoleColors.RESET);
+            System.out.println(enumConsoleColors.RED + "Informe somente números!" + enumConsoleColors.RESET);
             read.nextLine();
         }
 

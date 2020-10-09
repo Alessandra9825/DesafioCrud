@@ -1,7 +1,8 @@
 package MaquinaEstado;
 
 import DesafioCrud.Business.Acesso;
-import DesafioCrud.Comuns.ConsoleColors;
+import DesafioCrud.Comuns.Enuns.enumConsoleColors;
+import DesafioCrud.Comuns.vos.Usuario;
 import DesafioCrud.Console.Console;
 
 import java.util.Scanner;
@@ -12,8 +13,7 @@ public class EstadoConsoleLogin extends MaquinaEstadoConsole {
         boolean saida = false;
         Acesso access = new Acesso();
         Scanner read = new Scanner(System.in);
-        int password;
-        String user;
+        Usuario user = new Usuario();
 
         boolean login = false;
         int contador = 3;
@@ -21,22 +21,23 @@ public class EstadoConsoleLogin extends MaquinaEstadoConsole {
         {
             try{
                 if(contador != 3){
+                    Runtime.getRuntime().exec("cls");
                     System.out.println("Usuário ou senha inválidos - restam: " + contador + " Tentativas!");
                 }
 
                 System.out.println();
                 System.out.println("Digite seu usuario:");
-                user = read.next();
+                user.setLogin(read.nextLine());
 
                 System.out.println();
                 System.out.println("Digite sua senha:");
-                password = read.nextInt();
+                user.setSenha(read.nextLine());
 
-                login = access.login(user, password);
+                login = access.validaUsuario(user);
             }
             catch(Exception e){
                 System.out.println();
-                System.out.println(ConsoleColors.RED + "Digite somente numeros na senha!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Digite somente numeros na senha!" + enumConsoleColors.RESET);
                 read.nextLine();
             }
 
@@ -50,7 +51,6 @@ public class EstadoConsoleLogin extends MaquinaEstadoConsole {
             System.out.println("Usuário não conseguiu logar. Saindo....");
             saida = true;
         }
-
 
         return saida;
     }

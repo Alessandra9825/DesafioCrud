@@ -1,15 +1,11 @@
 package DesafioCrud.Business;
-import DesafioCrud.Comuns.ConsoleColors;
-import DesafioCrud.Comuns.Roupa;
-import DesafioCrud.Comuns.enumCor;
-import DesafioCrud.Comuns.enumTamanho;
-import DesafioCrud.DAO.RoupaDAO;
+import DesafioCrud.Comuns.Enuns.enumConsoleColors;
+import DesafioCrud.Comuns.vos.Roupa;
+import DesafioCrud.Comuns.Enuns.enumCor;
+import DesafioCrud.Comuns.Enuns.enumTamanho;
+import DesafioCrud.DAO.RoupaTextoDAO;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.time.LocalDateTime;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +13,7 @@ import java.util.Scanner;
 
 public class RoupaNegocio {
     public boolean salvar (Roupa roupa){
-        RoupaDAO dao = new RoupaDAO();
+        RoupaTextoDAO dao = new RoupaTextoDAO();
         boolean correto = true;
 
         correto = validaObjeto(roupa, true);
@@ -30,16 +26,16 @@ public class RoupaNegocio {
     }
 
     public boolean delete(int id){
-        RoupaDAO dao = new RoupaDAO();
+        RoupaTextoDAO dao = new RoupaTextoDAO();
         boolean resp = false;
 
-        Roupa consultada = dao.consulta(id);
+        Roupa consultada = (Roupa)dao.seleciona(id);
 
         if(consultada != null)
             resp = dao.delete(consultada);
 
         if(resp){
-            System.out.println(ConsoleColors.YELLOW + "Produto excluido com sucesso!" + ConsoleColors.RESET);
+            System.out.println(enumConsoleColors.YELLOW + "Produto excluido com sucesso!" + enumConsoleColors.RESET);
             return true;
         }else{
             System.out.println("Produto não consta no Estoque!");
@@ -48,7 +44,7 @@ public class RoupaNegocio {
     }
 
     public boolean alterar (Roupa object){
-        RoupaDAO dao = new RoupaDAO();
+        RoupaTextoDAO dao = new RoupaTextoDAO();
         boolean obj = validaObjeto(object, false);
 
         if(obj){
@@ -61,29 +57,29 @@ public class RoupaNegocio {
     }
 
     public Roupa consultaID(int codigoItem) {
-        RoupaDAO dao = new RoupaDAO();
+        RoupaTextoDAO dao = new RoupaTextoDAO();
 
-        Roupa consultada = dao.consulta(codigoItem);
+        Roupa consultada = (Roupa)dao.seleciona(codigoItem);
         if(Objects.nonNull(consultada)){
             System.out.println();
-            System.out.println(ConsoleColors.BLUE + "\tRoupas Cadastradas" + ConsoleColors.RESET);
+            System.out.println(enumConsoleColors.BLUE + "\tRoupas Cadastradas" + enumConsoleColors.RESET);
             return consultada;
         }
         else{
-            System.out.println(ConsoleColors.BLUE + "Produto não consta no estoque!" + ConsoleColors.RESET);
+            System.out.println(enumConsoleColors.BLUE + "Produto não consta no estoque!" + enumConsoleColors.RESET);
             System.out.println();
             return null;
         }
     }
 
-    public ArrayList<Roupa> consultaCor(enumCor cor) {
-        RoupaDAO dao = new RoupaDAO();
+    public ArrayList<Roupa> consultaCor(enumCor cor) throws SQLException {
+        RoupaTextoDAO dao = new RoupaTextoDAO();
         ArrayList<Roupa> consulta = dao.consultaCor(cor);
         return consulta;
     }
 
-    public ArrayList<Roupa> consultaTamanho(enumTamanho tamanho){
-        RoupaDAO dao = new RoupaDAO();
+    public ArrayList<Roupa> consultaTamanho(enumTamanho tamanho) throws SQLException {
+        RoupaTextoDAO dao = new RoupaTextoDAO();
         ArrayList<Roupa> consulta = dao.consultaTamanho(tamanho);
         return consulta;
     }
@@ -98,7 +94,7 @@ public class RoupaNegocio {
     }
 
     public boolean validaObjeto(Roupa obj, boolean salvar){
-        RoupaDAO dao = new RoupaDAO();
+        RoupaTextoDAO dao = new RoupaTextoDAO();
         List<String> erros = new ArrayList<String>();
 
         if(obj.getLocalCompra().isEmpty()){
@@ -117,13 +113,13 @@ public class RoupaNegocio {
             erros.add("Descrição está em branco, informe uam descrição!");
         }
 
-        if(salvar && Objects.nonNull(dao.consulta(obj.getCodigoItem()))){
+        if(salvar && Objects.nonNull((dao.seleciona(obj.getCodigoItem())))){
             erros.add("Produto com ID existente!");
         }
 
         if(erros.size() > 0){
             System.out.println();
-            System.out.println(ConsoleColors.RED + "Erros!" + ConsoleColors.RESET);
+            System.out.println(enumConsoleColors.RED + "Erros!" + enumConsoleColors.RESET);
             for(String e : erros){
                 System.out.println(e);
             }
@@ -146,7 +142,7 @@ public class RoupaNegocio {
                 return enumCor.valueOf(read.next().toUpperCase());
             }
             catch (Exception e){
-                System.out.println(ConsoleColors.RED + "Cor não conta no catálogo, digite novamente!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Cor não conta no catálogo, digite novamente!" + enumConsoleColors.RESET);
             }
         }
     }
@@ -163,7 +159,7 @@ public class RoupaNegocio {
                 return enumTamanho.valueOf(read.next().toUpperCase());
             }
             catch (Exception e){
-                System.out.println(ConsoleColors.RED + "Tamanho não consta no catálogo, digite novamente!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Tamanho não consta no catálogo, digite novamente!" + enumConsoleColors.RESET);
             }
         }
     }

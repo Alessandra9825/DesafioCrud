@@ -1,12 +1,12 @@
 package MaquinaEstado;
 
 import DesafioCrud.Business.RoupaNegocio;
-import DesafioCrud.Comuns.ConsoleColors;
-import DesafioCrud.Comuns.Roupa;
-import DesafioCrud.Comuns.enumCor;
-import DesafioCrud.Comuns.enumTamanho;
+import DesafioCrud.Comuns.Enuns.enumConsoleColors;
+import DesafioCrud.Comuns.vos.Roupa;
+import DesafioCrud.Comuns.Enuns.enumCor;
+import DesafioCrud.Comuns.Enuns.enumTamanho;
 import DesafioCrud.Console.Console;
-import DesafioCrud.DAO.RoupaDAO;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -55,7 +55,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
             catch (Exception err)
             {
                 System.out.println();
-                System.out.println(ConsoleColors.RED + "Informe somente números!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Informe somente números!" + enumConsoleColors.RESET);
                 read.next();
             }
         }
@@ -96,7 +96,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
 
                 if(codigoItem <= 0){
                     System.out.println();
-                    System.out.println(ConsoleColors.RED + "Nenhum id é menor ou igual a zero!" + ConsoleColors.RESET);
+                    System.out.println(enumConsoleColors.RED + "Nenhum id é menor ou igual a zero!" + enumConsoleColors.RESET);
                     resp = sairConsulta();
                 }
                 else{
@@ -108,7 +108,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
                 }
                 else{
                     System.out.println();
-                    System.out.println(ConsoleColors.BLUE + "Nenhum produto encontrado!" + ConsoleColors.RESET);
+                    System.out.println(enumConsoleColors.BLUE + "Nenhum produto encontrado!" + enumConsoleColors.RESET);
                 }
 
                 resp = sairConsulta();
@@ -116,7 +116,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
             catch (Exception err)
             {
                 System.out.println();
-                System.out.println(ConsoleColors.RED + "Informe somente números!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Informe somente números!" + enumConsoleColors.RESET);
                 read.next();
             }
         }
@@ -140,14 +140,14 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
                    lista = neg.consultaCor(cor);
                     if(!lista.isEmpty()){
                         System.out.println();
-                        System.out.println(ConsoleColors.BLUE + "\tRoupas da cor: " + cor.getCor() + ConsoleColors.RESET);
+                        System.out.println(enumConsoleColors.BLUE + "\tRoupas da cor: " + cor.getCor() + enumConsoleColors.RESET);
                         for(Roupa obj : lista){
                             mostraObjeto(obj);
                         }
                     }
                     else{
                         System.out.println();
-                        System.out.println(ConsoleColors.BLUE + "Nenhuma referência encontrada no estoque!" + ConsoleColors.RESET);
+                        System.out.println(enumConsoleColors.BLUE + "Nenhuma referência encontrada no estoque!" + enumConsoleColors.RESET);
                     }
                     resp = sairConsulta();
                 }
@@ -155,7 +155,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
             catch (Exception err)
             {
                 System.out.println();
-                System.out.println(ConsoleColors.RED + "Informe somente números!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Informe somente números!" + enumConsoleColors.RESET);
                 read.next();
             }
         }
@@ -179,14 +179,14 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
                    lista = neg.consultaTamanho(tamanho);
                     if(!lista.isEmpty()){
                         System.out.println();
-                        System.out.println(ConsoleColors.BLUE + "\tRoupas do tamanho: " + tamanho.getTamanho() + ConsoleColors.RESET);
+                        System.out.println(enumConsoleColors.BLUE + "\tRoupas do tamanho: " + tamanho.getTamanho() + enumConsoleColors.RESET);
                         for(Roupa obj : lista){
                             mostraObjeto(obj);
                         }
                     }
                     else{
                         System.out.println();
-                        System.out.println(ConsoleColors.BLUE + "Nenhuma referência encontrada no estoque!" + ConsoleColors.RESET);
+                        System.out.println(enumConsoleColors.BLUE + "Nenhuma referência encontrada no estoque!" + enumConsoleColors.RESET);
                     }
                     resp = sairConsulta();
                 }
@@ -194,7 +194,7 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
             catch (Exception err)
             {
                 System.out.println();
-                System.out.println(ConsoleColors.RED + "Informe somente números!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Informe somente números!" + enumConsoleColors.RESET);
                 read.next();
             }
         }
@@ -214,11 +214,11 @@ public class EstadoConsoleConsultar extends MaquinaEstadoConsole{
                 else if (resp == 1)
                     return false;
                 else
-                    System.out.println(ConsoleColors.RED + "Informe somente 0 ou 1!" + ConsoleColors.RESET);
+                    System.out.println(enumConsoleColors.RED + "Informe somente 0 ou 1!" + enumConsoleColors.RESET);
             }
             catch (Exception e)
             {
-                System.out.println(ConsoleColors.RED + "Informe 0 (Sair) ou 1 (Consultar)!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Informe 0 (Sair) ou 1 (Consultar)!" + enumConsoleColors.RESET);
                 read.nextLine();
             }
         }

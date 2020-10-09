@@ -3,14 +3,24 @@ package DesafioCrud.DAO;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import DesafioCrud.Comuns.*;
 
-public class RoupaDAO {
+import Basis.DAO;
+import DesafioCrud.Comuns.Basis.Entidade;
+import DesafioCrud.Comuns.Enuns.enumCor;
+import DesafioCrud.Comuns.Enuns.enumTamanho;
+import DesafioCrud.Comuns.vos.Roupa;
+
+public class RoupaTextoDAO extends DAO {
     public final static String diretorio = System.getProperty("user.dir")+"\\Produto.txt";
+
+    public RoupaTextoDAO() {
+        super(Roupa.class);
+    }
 
     private FileWriter  validaTxt () throws IOException {
         FileWriter arquivo;
@@ -48,7 +58,7 @@ public class RoupaDAO {
         }
         catch (IOException err)
         {
-            Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
+            Logger.getLogger(RoupaTextoDAO.class.getName()).log(Level.SEVERE, null, err);
             return false;
         }
     }
@@ -56,7 +66,7 @@ public class RoupaDAO {
     public boolean delete (Roupa object){
         try
         {
-            ArrayList<Roupa> listProdutos = consulta();
+            ArrayList<Roupa> listProdutos = lista();
             if(listProdutos.removeIf(roupa -> (roupa.getCodigoItem() == object.getCodigoItem())))
             {
                 FileWriter arquivo = new FileWriter("Produto.txt",true);
@@ -86,9 +96,9 @@ public class RoupaDAO {
                 return false;
             }
         }
-        catch (IOException err)
+        catch (IOException | SQLException err)
         {
-            Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
+            Logger.getLogger(RoupaTextoDAO.class.getName()).log(Level.SEVERE, null, err);
         }
 
         return true;
@@ -117,14 +127,63 @@ public class RoupaDAO {
         }
         catch (Exception err)
         {
-            Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
+            Logger.getLogger(RoupaTextoDAO.class.getName()).log(Level.SEVERE, null, err);
             return false;
         }
 
         return true;
     }
 
-    public ArrayList<Roupa> consulta()  {
+    public ArrayList<Roupa> consultaCor(enumCor cor) throws SQLException {
+        ArrayList<Roupa> listaProdutos = lista();
+        listaProdutos.removeIf(obj -> (obj.getCor() != cor));
+        return listaProdutos;
+    }
+
+    public ArrayList<Roupa> consultaTamanho(enumTamanho tamanho) throws SQLException {
+        ArrayList<Roupa> listaProdutos = lista();
+        listaProdutos.removeIf(obj -> (obj.getTamanho() != tamanho));
+        return listaProdutos;
+    }
+
+    private Roupa find (int id, ArrayList<Roupa> list) {
+        Roupa consultada = null;
+
+        for (Roupa obj : list)
+        {
+            if (obj.getCodigoItem() == id)
+            {
+                consultada = obj;
+            }
+        }
+
+        return consultada;
+    }
+
+    @Override
+    public Entidade seleciona(int id) {
+        Roupa consultRoupa = null;
+
+        try
+        {
+            ArrayList<Roupa> listProdutos = lista();
+            consultRoupa = find(id, listProdutos);
+        }
+        catch (Exception e)
+        {
+            Logger.getLogger(RoupaTextoDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        return consultRoupa;
+    }
+
+    @Override
+    public Entidade localiza(String codigo) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public ArrayList lista() throws SQLException {
         ArrayList<Roupa> listProdutos = new ArrayList<Roupa>();
 
         try
@@ -157,54 +216,11 @@ public class RoupaDAO {
         }
         catch (IOException err)
         {
-            Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, err);
+            Logger.getLogger(RoupaTextoDAO.class.getName()).log(Level.SEVERE, null, err);
 
             return null;
         }
 
         return listProdutos;
     }
-
-    public Roupa consulta(int id)  {
-        Roupa consultRoupa = null;
-
-        try
-        {
-            ArrayList<Roupa> listProdutos = consulta();
-            consultRoupa = find(id, listProdutos);
-        }
-        catch (Exception e)
-        {
-            Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, e);
-        }
-
-        return consultRoupa;
-    }
-
-    public ArrayList<Roupa> consultaCor(enumCor cor){
-        ArrayList<Roupa> listaProdutos = consulta();
-        listaProdutos.removeIf(obj -> (obj.getCor() != cor));
-        return listaProdutos;
-    }
-
-    public ArrayList<Roupa> consultaTamanho(enumTamanho tamanho){
-        ArrayList<Roupa> listaProdutos = consulta();
-        listaProdutos.removeIf(obj -> (obj.getTamanho() != tamanho));
-        return listaProdutos;
-    }
-
-    private Roupa find (int id, ArrayList<Roupa> list) {
-        Roupa consultada = null;
-
-        for (Roupa obj : list)
-        {
-            if (obj.getCodigoItem() == id)
-            {
-                consultada = obj;
-            }
-        }
-
-        return consultada;
-    }
-
 }

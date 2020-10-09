@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="DesafioCrud.Comuns" />
     <orderEntry type="module" module-name="DesafioCrud.DAO" />
+    <orderEntry type="module" module-name="DesafioCrud.Comuns" />
   </component>
 </module>

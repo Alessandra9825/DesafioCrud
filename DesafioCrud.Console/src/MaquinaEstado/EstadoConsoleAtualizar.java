@@ -1,12 +1,10 @@
 package MaquinaEstado;
 
 import DesafioCrud.Business.RoupaNegocio;
-import DesafioCrud.Comuns.ConsoleColors;
-import DesafioCrud.Comuns.Roupa;
-import DesafioCrud.Comuns.enumCor;
-import DesafioCrud.Comuns.enumTamanho;
+import DesafioCrud.Comuns.Enuns.enumConsoleColors;
+import DesafioCrud.Comuns.vos.Roupa;
 import DesafioCrud.Console.Console;
-import DesafioCrud.DAO.RoupaDAO;
+import DesafioCrud.DAO.RoupaTextoDAO;
 import java.util.Scanner;
 
 public class EstadoConsoleAtualizar extends MaquinaEstadoConsole {
@@ -14,7 +12,7 @@ public class EstadoConsoleAtualizar extends MaquinaEstadoConsole {
 
     @Override
     public boolean Executa() {
-        RoupaDAO dao = new RoupaDAO();
+        RoupaTextoDAO dao = new RoupaTextoDAO();
         RoupaNegocio neg = new RoupaNegocio();
 
         boolean saida = false;
@@ -27,7 +25,7 @@ public class EstadoConsoleAtualizar extends MaquinaEstadoConsole {
 
         while(!resp){
             try{
-                Roupa consultada = dao.consulta(codigoItem);
+                Roupa consultada = (Roupa)dao.seleciona(codigoItem);
 
                 System.out.println();
                 System.out.println("O que deseja alterar?");
@@ -74,7 +72,7 @@ public class EstadoConsoleAtualizar extends MaquinaEstadoConsole {
                     resp = neg.alterar(consultada);
 
                 if(resp)
-                    System.out.println(ConsoleColors.YELLOW + "Produto atualizado com sucesso!" + ConsoleColors.RESET);
+                    System.out.println(enumConsoleColors.YELLOW + "Produto atualizado com sucesso!" + enumConsoleColors.RESET);
                 else{
                     resp = !novaAtualizacao();
                 }
@@ -105,11 +103,11 @@ public class EstadoConsoleAtualizar extends MaquinaEstadoConsole {
                 else if (resp == 1)
                     return true;
                 else
-                    System.out.println(ConsoleColors.RED + "Informe somente 0 ou 1!" + ConsoleColors.RESET);
+                    System.out.println(enumConsoleColors.RED + "Informe somente 0 ou 1!" + enumConsoleColors.RESET);
             }
             catch (Exception e)
             {
-                System.out.println(ConsoleColors.RED + "Informe 0 (sair) ou 1 (Atualizar)!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Informe 0 (sair) ou 1 (Atualizar)!" + enumConsoleColors.RESET);
             }
         }
     }

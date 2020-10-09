@@ -1,6 +1,6 @@
-package DesafioCrud.Comuns;
+package DesafioCrud.Comuns.Enuns;
 
-public class ConsoleColors {
+public class enumConsoleColors {
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset
 

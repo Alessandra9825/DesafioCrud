@@ -1,15 +1,11 @@
 package MaquinaEstado;
 
 import DesafioCrud.Business.RoupaNegocio;
-import DesafioCrud.Comuns.ConsoleColors;
-import DesafioCrud.Comuns.Roupa;
-import DesafioCrud.Comuns.enumCor;
-import DesafioCrud.Comuns.enumTamanho;
+import DesafioCrud.Comuns.Enuns.enumConsoleColors;
+import DesafioCrud.Comuns.vos.Roupa;
 import DesafioCrud.Console.Console;
-import DesafioCrud.DAO.RoupaDAO;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Scanner;
 
 public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
@@ -62,7 +58,7 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
 
             if(reg){
                 System.out.println();
-                System.out.println(ConsoleColors.YELLOW + "Cadastro realizado com sucesso!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.YELLOW + "Cadastro realizado com sucesso!" + enumConsoleColors.RESET);
             }
             else
             {
@@ -90,11 +86,11 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
                 else if (resp == 1)
                     return true;
                 else
-                    System.out.println(ConsoleColors.RED + "Informe somente 0 ou 1!" + ConsoleColors.RESET);
+                    System.out.println(enumConsoleColors.RED + "Informe somente 0 ou 1!" + enumConsoleColors.RESET);
             }
             catch (Exception e)
             {
-                System.out.println(ConsoleColors.RED + "Informe 0 (sair) ou 1 (recadastrar)!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Informe 0 (sair) ou 1 (recadastrar)!" + enumConsoleColors.RESET);
                 read.nextLine();
             }
         }
@@ -110,12 +106,12 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
                 read.nextLine();
 
                 if(id <= 0)
-                    System.out.println(ConsoleColors.RED + "informe códigos maiores que 0!" + ConsoleColors.RESET);
+                    System.out.println(enumConsoleColors.RED + "informe códigos maiores que 0!" + enumConsoleColors.RESET);
                 else
                     return id;
             }
             catch (Exception e){
-                System.out.println(ConsoleColors.RED + "informe somente números no código!" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "informe somente números no código!" + enumConsoleColors.RESET);
                 read.nextLine();
             }
         }
@@ -129,7 +125,7 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
                 return read.nextDouble();
             }
             catch (Exception e){
-                System.out.println(ConsoleColors.RED + "Informe somente números com (,)" + ConsoleColors.RESET);
+                System.out.println(enumConsoleColors.RED + "Informe somente números com (,)" + enumConsoleColors.RESET);
                 read.nextLine();
             }
         }
