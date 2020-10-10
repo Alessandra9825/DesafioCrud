@@ -87,37 +87,3 @@ public class MySQLDAO <E extends Entidade> extends DAO {
     }
 }
 
-/* Script do Banco
-*
-    create database DesafioCRUD;
-    go
-
-    use DesafioCRUD;
-    go
-
-    create table tbUsuario(
-        Login varchar(30) primary key,
-        Senha varchar(30)
-    )
-    go
-
-    create table tbRoupa(
-        codigoItem int primary key,
-        dataEntrada datetime,
-        localCompra varchar(100),
-        tipo varchar(100),
-        marca varchar(100),
-        descricao varchar(100),
-        cor varchar(20),
-        tamanho varchar(3),
-        valorCompra money,
-        valorEtiqueta money,
-        valorMargem money,
-        valorSugerido money
-    )
-    go
-
-    insert into tbUsuario values('Lucas', '123456');
-*
-* */
-
