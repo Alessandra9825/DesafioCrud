@@ -1,5 +1,6 @@
 package DesafioCrud.Comuns.vos;
 
+import DesafioCrud.Comuns.Annotations.CampoNoBanco;
 import DesafioCrud.Comuns.Basis.Entidade;
 import DesafioCrud.Comuns.Enuns.enumCor;
 import DesafioCrud.Comuns.Enuns.enumTamanho;
@@ -7,18 +8,43 @@ import DesafioCrud.Comuns.Enuns.enumTamanho;
 import java.time.LocalDateTime;
 
 public class Roupa extends Entidade {
+
+    @CampoNoBanco(nome = "codigoItem", chave = true)
     private int codigoItem;
+
+    @CampoNoBanco(nome = "dataEntrada", chave = false)
     private LocalDateTime dataEntrada;
+
+    @CampoNoBanco(nome = "localCompra", chave = false)
     private String localCompra;
+
+    @CampoNoBanco(nome = "tipo", chave = false)
     private String tipo;
+
+    @CampoNoBanco(nome = "marca", chave = false)
     private String marca;
+
+    @CampoNoBanco(nome = "descricao", chave = false)
     private String descricao;
+
+    @CampoNoBanco(nome = "cor", chave = false)
     private enumCor cor;
+
+    @CampoNoBanco(nome = "tamanho", chave = false)
     private enumTamanho tamanho;
+
+    @CampoNoBanco(nome = "valorCompra", chave = false)
     private double valorCompra;
+
+    @CampoNoBanco(nome = "valorEtiqueta", chave = false)
     private double valorEtiqueta;
+
+    @CampoNoBanco(nome = "valorMargem", chave = false)
     private double valorMargem;
+
+    @CampoNoBanco(nome = "valorSugerido", chave = false)
     private double valorSugerido;
+
 
     public int getCodigoItem() {
         return codigoItem;

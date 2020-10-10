@@ -3,7 +3,7 @@ import DesafioCrud.Comuns.Enuns.enumConsoleColors;
 import DesafioCrud.Comuns.vos.Roupa;
 import DesafioCrud.Comuns.Enuns.enumCor;
 import DesafioCrud.Comuns.Enuns.enumTamanho;
-import DesafioCrud.DAO.RoupaTextoDAO;
+import DesafioCrud.DAO.Texto.RoupaTextoDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

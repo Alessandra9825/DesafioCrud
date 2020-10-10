@@ -12,7 +12,7 @@ public class Console {
     public static MaquinaEstadoConsole estadoConsole;
 
     public static void main(String[] args) throws IOException {
-        Config.getInstance().setDataBase(enumRepositorio.TEXTO);
+        Config.getInstance().setDataBase(enumRepositorio.MYSQL);
 
         String repositorio = Config.getInstance().getEnumRepositorio().getDescricao();
         System.out.println("Sistema configurado para " + repositorio);

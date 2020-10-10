@@ -1,17 +1,13 @@
-package DesafioCrud.DAO;
+package DesafioCrud.DAO.Texto;
 
 import Basis.DAO;
 import DesafioCrud.Comuns.Basis.Entidade;
-import DesafioCrud.Comuns.Enuns.enumCor;
-import DesafioCrud.Comuns.Enuns.enumTamanho;
-import DesafioCrud.Comuns.vos.Roupa;
 import DesafioCrud.Comuns.vos.Usuario;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;

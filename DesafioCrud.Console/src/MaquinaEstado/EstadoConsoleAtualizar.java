@@ -4,7 +4,7 @@ import DesafioCrud.Business.RoupaNegocio;
 import DesafioCrud.Comuns.Enuns.enumConsoleColors;
 import DesafioCrud.Comuns.vos.Roupa;
 import DesafioCrud.Console.Console;
-import DesafioCrud.DAO.RoupaTextoDAO;
+import DesafioCrud.DAO.Texto.RoupaTextoDAO;
 import java.util.Scanner;
 
 public class EstadoConsoleAtualizar extends MaquinaEstadoConsole {

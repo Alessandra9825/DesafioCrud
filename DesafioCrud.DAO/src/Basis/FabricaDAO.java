@@ -2,8 +2,11 @@ package Basis;
 
 import DesafioCrud.Comuns.Enuns.enumEntidade;
 import DesafioCrud.Comuns.Enuns.enumRepositorio;
-import DesafioCrud.DAO.RoupaTextoDAO;
-import DesafioCrud.DAO.UsuarioTextoDAO;
+import DesafioCrud.Comuns.vos.Roupa;
+import DesafioCrud.DAO.MySQL.RoupaMySQLDAO;
+import DesafioCrud.DAO.MySQL.UsuarioMySQLDAO;
+import DesafioCrud.DAO.Texto.RoupaTextoDAO;
+import DesafioCrud.DAO.Texto.UsuarioTextoDAO;
 
 public class FabricaDAO {
 
@@ -38,9 +41,11 @@ public class FabricaDAO {
         DAO retorno;
         switch (entidade){
             case USUARIO:
-                retorno = null;
+                retorno = new UsuarioMySQLDAO();
+                break;
             case ROUPA:
-                retorno = null;
+                retorno = new RoupaMySQLDAO();
+                break;
             default:
                 retorno = null;
         }

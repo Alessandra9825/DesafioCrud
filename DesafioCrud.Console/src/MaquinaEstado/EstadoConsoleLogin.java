@@ -21,7 +21,7 @@ public class EstadoConsoleLogin extends MaquinaEstadoConsole {
         {
             try{
                 if(contador != 3){
-                    Runtime.getRuntime().exec("cls");
+                    System.out.println();
                     System.out.println("Usuário ou senha inválidos - restam: " + contador + " Tentativas!");
                 }
 
@@ -38,7 +38,6 @@ public class EstadoConsoleLogin extends MaquinaEstadoConsole {
             catch(Exception e){
                 System.out.println();
                 System.out.println(enumConsoleColors.RED + "Digite somente numeros na senha!" + enumConsoleColors.RESET);
-                read.nextLine();
             }
 
             contador--;
