@@ -22,7 +22,8 @@ public class MySQLDAO <E extends Entidade> extends DAO {
     }
 
     protected E preencheEntidade(ResultSet rs) {
-        throw new UnsupportedOperationException("Implementar na classe filha."); //To change body of generated methods, choose Tools | Templates.
+        //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Implementar na classe filha.");
     }
 
     @Override

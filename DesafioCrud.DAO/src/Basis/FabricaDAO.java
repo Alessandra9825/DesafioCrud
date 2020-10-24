@@ -2,7 +2,6 @@ package Basis;
 
 import DesafioCrud.Comuns.Enuns.enumEntidade;
 import DesafioCrud.Comuns.Enuns.enumRepositorio;
-import DesafioCrud.Comuns.vos.Roupa;
 import DesafioCrud.DAO.MySQL.RoupaMySQLDAO;
 import DesafioCrud.DAO.MySQL.UsuarioMySQLDAO;
 import DesafioCrud.DAO.Texto.RoupaTextoDAO;
