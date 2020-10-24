@@ -35,7 +35,10 @@ public class RoupaTextoDAO extends DAO {
        return arquivo;
     }
 
-    public boolean salvar(Roupa obj) {
+    @Override
+    public boolean salvar(Entidade entidade) {
+        Roupa obj = (Roupa)entidade;
+
         try
         {
             BufferedWriter bw = new BufferedWriter(validaTxt());

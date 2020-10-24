@@ -162,4 +162,9 @@ public class UsuarioTextoDAO extends DAO {
 
         return listUsuarios;
     }
+
+    @Override
+    public boolean salvar(Entidade entidade) throws SQLException {
+        return false;
+    }
 }

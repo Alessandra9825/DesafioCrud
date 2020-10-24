@@ -9,6 +9,12 @@ public abstract class DAO <E extends Entidade> {
     protected Class<E> entityClass;
 
     public DAO(Class<E> entityClass){
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         this.entityClass = entityClass;
     }
 
@@ -24,4 +30,6 @@ public abstract class DAO <E extends Entidade> {
             throw new RuntimeException(e);
         }
     }
+
+    public abstract boolean salvar(Entidade entidade) throws SQLException;
 }

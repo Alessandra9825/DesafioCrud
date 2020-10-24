@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class MySQLDAO <E extends Entidade> extends DAO {
 
-    final String stringConexao = "jdbc:sqlserver://localhost;databaseName=DesafioCRUD";
-    final String usuario = "sa";
-    final String senha = "123456";
+    private final String stringConexao = "jdbc:sqlserver://localhost:1433;databaseName=DesafioCRUD;";
+    private final String usuario = "sa";
+    private final String senha = "123456";
     private String tabela;
 
     public MySQLDAO(Class entityClass) {
@@ -39,9 +39,7 @@ public class MySQLDAO <E extends Entidade> extends DAO {
             try(PreparedStatement statement = conexao.prepareStatement(SQL)){
                 statement.setString(1, codigo);
                 try(ResultSet rs = statement.executeQuery()){
-                    if(rs.first()){
-                        entidade = preencheEntidade(rs);
-                    }
+                    entidade = preencheEntidade(rs);
                 }
             }
         }
@@ -61,7 +59,7 @@ public class MySQLDAO <E extends Entidade> extends DAO {
         }
         if(campos.length() > 0)
             campos = campos.substring(0, campos.length()-1);
-        return "select " + campos + " from " + tabela + "where" + chave + " = ?";
+        return "select " + campos + " from " + tabela + " where " + chave + " = ?";
     }
 
     protected String getListaCommand() {
@@ -85,6 +83,27 @@ public class MySQLDAO <E extends Entidade> extends DAO {
             }
         }
         return entidades;
+    }
+
+    @Override
+    public boolean salvar(Entidade entidade) throws SQLException {
+        try(Connection conexao = DriverManager.getConnection(stringConexao, usuario, senha)){
+            String SQL = getInsertCommand(entidade);
+            try(PreparedStatement stmt = getInsertStatement(entidade, conexao.prepareStatement(SQL))){
+                stmt.executeQuery();
+            }
+        }
+        return false;
+    }
+
+    protected String getInsertCommand(Entidade entidade) {
+        //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Implementar na classe filha.");
+    }
+
+    protected PreparedStatement getInsertStatement(Entidade entidade, PreparedStatement stmt) throws SQLException {
+        //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Implementar na classe filha.");
     }
 }
 

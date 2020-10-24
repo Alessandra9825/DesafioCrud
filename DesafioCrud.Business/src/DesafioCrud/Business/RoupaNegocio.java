@@ -1,25 +1,30 @@
 package DesafioCrud.Business;
+
+import Basis.FabricaRepositorio;
+import DesafioCrud.Comuns.Basis.Entidade;
 import DesafioCrud.Comuns.Enuns.enumConsoleColors;
+import DesafioCrud.Comuns.Enuns.enumEntidade;
 import DesafioCrud.Comuns.vos.Roupa;
 import DesafioCrud.Comuns.Enuns.enumCor;
 import DesafioCrud.Comuns.Enuns.enumTamanho;
+import DesafioCrud.Comuns.vos.Usuario;
 import DesafioCrud.DAO.Texto.RoupaTextoDAO;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import Repositorio.Repositorio;
 
 public class RoupaNegocio {
     public boolean salvar (Roupa roupa){
-        RoupaTextoDAO dao = new RoupaTextoDAO();
+        Repositorio repositorio = FabricaRepositorio.Fabrica();
         boolean correto = true;
 
         correto = validaObjeto(roupa, true);
 
         if(correto){
-            dao.salvar(roupa);
+            correto = repositorio.salvar(roupa, enumEntidade.ROUPA);
         }
 
         return correto;
@@ -57,9 +62,9 @@ public class RoupaNegocio {
     }
 
     public Roupa consultaID(int codigoItem) {
-        RoupaTextoDAO dao = new RoupaTextoDAO();
+        Repositorio repositorio = FabricaRepositorio.Fabrica();
+        Roupa consultada = (Roupa)repositorio.seleciona(codigoItem, enumEntidade.ROUPA);
 
-        Roupa consultada = (Roupa)dao.seleciona(codigoItem);
         if(Objects.nonNull(consultada)){
             System.out.println();
             System.out.println(enumConsoleColors.BLUE + "\tRoupas Cadastradas" + enumConsoleColors.RESET);
@@ -94,7 +99,7 @@ public class RoupaNegocio {
     }
 
     public boolean validaObjeto(Roupa obj, boolean salvar){
-        RoupaTextoDAO dao = new RoupaTextoDAO();
+        Repositorio repositorio = FabricaRepositorio.Fabrica();
         List<String> erros = new ArrayList<String>();
 
         if(obj.getLocalCompra().isEmpty()){
@@ -113,7 +118,7 @@ public class RoupaNegocio {
             erros.add("Descrição está em branco, informe uam descrição!");
         }
 
-        if(salvar && Objects.nonNull((dao.seleciona(obj.getCodigoItem())))){
+        if(salvar && Objects.nonNull((repositorio.seleciona(obj.getCodigoItem(), enumEntidade.ROUPA)))){
             erros.add("Produto com ID existente!");
         }
 

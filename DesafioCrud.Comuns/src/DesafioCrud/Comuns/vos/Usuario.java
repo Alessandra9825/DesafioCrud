@@ -5,9 +5,9 @@ import DesafioCrud.Comuns.Annotations.CampoNoBanco;
 
 public class Usuario extends Entidade {
 
-    @CampoNoBanco(nome = "login", chave = true)
+    @CampoNoBanco(nome = "Login", chave = true)
     private String login;
-    @CampoNoBanco(nome = "senha", chave = false)
+    @CampoNoBanco(nome = "Senha", chave = false)
     private String senha;
 
     public String getLogin() {

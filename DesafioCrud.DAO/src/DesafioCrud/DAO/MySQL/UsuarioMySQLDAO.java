@@ -19,8 +19,10 @@ public class UsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
     protected Entidade preencheEntidade(ResultSet rs) {
         Usuario entidade = new Usuario();
         try{
-            entidade.setLogin(rs.getString("Login"));
-            entidade.setSenha(rs.getString("Senha"));
+            while(rs.next()){
+                entidade.setLogin(rs.getString("Login"));
+                entidade.setSenha(rs.getString("Senha"));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioMySQLDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

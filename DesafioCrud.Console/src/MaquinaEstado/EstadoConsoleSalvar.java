@@ -53,8 +53,7 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
             obj.setValorEtiqueta(valor("Informe o Valor da Etiqueta:"));
             obj.setValorMargem(neg.valorMargem(obj.getValorCompra()));
 
-            RoupaNegocio business = new RoupaNegocio();
-            reg = business.salvar(obj);
+            reg = neg.salvar(obj);
 
             if(reg){
                 System.out.println();
@@ -103,7 +102,7 @@ public class EstadoConsoleSalvar extends MaquinaEstadoConsole{
                 System.out.println();
                 System.out.println("Codigo do Item:");
                 id =  read.nextInt();
-                read.nextLine();
+                //read.nextLine();
 
                 if(id <= 0)
                     System.out.println(enumConsoleColors.RED + "informe códigos maiores que 0!" + enumConsoleColors.RESET);

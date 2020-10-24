@@ -32,4 +32,18 @@ public class RepositorioTexto extends Repositorio {
 
         return entidade;
     }
+
+    @Override
+    public boolean salvar(Entidade entidade, enumEntidade tipoEntidade) {
+        DAO dao = FabricaDAO.fabrica(tipoEntidade, enumRepositorio.MYSQL);
+        boolean salvo = false;
+
+        try {
+            salvo = dao.salvar(entidade);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return salvo;
+    }
 }
